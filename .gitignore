@@ -3,5 +3,3 @@ node_modules
 .DS_Store
 __tests__
 yarn.lock
-android
-ios

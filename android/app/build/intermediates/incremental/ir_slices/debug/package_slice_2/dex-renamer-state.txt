@@ -1,0 +1,4 @@
+#Sun Jul 14 15:21:59 IST 2019
+base.0=/home/sahil-dua/MERP/mback/android/app/build/intermediates/transforms/dexMerger/debug/2
+path.0=classes.dex
+renamed.0=classes.dex

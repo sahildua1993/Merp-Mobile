@@ -1,0 +1,28 @@
+dependencies: \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTJavaScriptLoader.mm \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Release-iphonesimulator/include/cxxreact/JSBundleType.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/third-party/folly-2018.10.22.00/folly/Portability.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/third-party/folly-2018.10.22.00/folly/portability/Config.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/third-party/folly-2018.10.22.00/folly/CPortability.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Release-iphonesimulator/include/yoga/Yoga.h \
+  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Release-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Release-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Release-iphonesimulator/include/yoga/YGValue.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTMultipartDataTask.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTMultipartStreamReader.h \
+  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTPerformanceLogger.h

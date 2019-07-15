@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>D382A6C7-F79C-4A5A-BC56-540F667E30B6</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>D382A6C7-F79C-4A5A-BC56-540F667E30B6.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Merp project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Merp</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project Merp with scheme Merp and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>581519867.82125998</real>
+			<key>timeStoppedRecording</key>
+			<real>581519870.74602997</real>
+			<key>title</key>
+			<string>Building project Merp with scheme Merp and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>D382A6C7-F79C-4A5A-BC56-540F667E30B6</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

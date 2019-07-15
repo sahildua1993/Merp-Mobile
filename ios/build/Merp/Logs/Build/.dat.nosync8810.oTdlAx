@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>0F502932-374C-42A1-B2E3-5549ACF25A98</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>0F502932-374C-42A1-B2E3-5549ACF25A98.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Merp project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Merp</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project Merp with scheme Merp and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>581504436.45656705</real>
+			<key>timeStoppedRecording</key>
+			<real>581504439.60162401</real>
+			<key>title</key>
+			<string>Building project Merp with scheme Merp and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>0F502932-374C-42A1-B2E3-5549ACF25A98</string>
+		</dict>
+		<key>DE8864A9-05B2-469C-AF91-673D11F588F7</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>DE8864A9-05B2-469C-AF91-673D11F588F7.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>S</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>Merp project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Merp</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project Merp with scheme Merp and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>581504319.66540897</real>
+			<key>timeStoppedRecording</key>
+			<real>581504323.03212404</real>
+			<key>title</key>
+			<string>Building project Merp with scheme Merp and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>DE8864A9-05B2-469C-AF91-673D11F588F7</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
