@@ -262,9 +262,6 @@ export default class Login extends React.Component {
      if(status === "true")
 
      {
-
-      
-
       AsyncStorage.setItem('sessionstatus', response.status,() =>{
 
       AsyncStorage.setItem('session', JSON.stringify(response.user_details),() =>{

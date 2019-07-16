@@ -90,7 +90,7 @@ const MyStatusBar = ({backgroundColor, ...props}) => (
 
       AsyncStorage.getItem('safeguard',(err,result)=>{
 
-        this.setState({
+          this.setState({
 
           isLoading: false,
 
