@@ -5,6 +5,7 @@ import FontAwesome, { Icons } from 'react-native-fontawesome';
 import HTMLView from 'react-native-htmlview';
 import Base64 from 'base-64'
 import { Fonts } from './src/utils/Fonts';
+import { COLOR_CODES } from './constants';
 
 const MyStatusBar = ({backgroundColor, ...props}) => (
     <View style={[styles.statusBar, { backgroundColor }]}>
@@ -35,7 +36,6 @@ export default class Cardpage extends React.Component {
     }
 
     initialState = (cards, chartid, actions) => {
-        console.log('cards, chartid, actions', cards, chartid, actions);
         const flowChartCards = cards.filter(item => item.chart_id === chartid);
         let beginIndex;
         flowChartCards.map((item, idx) => {
@@ -92,7 +92,7 @@ export default class Cardpage extends React.Component {
         const { newFlowCards, activeCardIndex } = this.state;
         const { navigation } = this.props;
         const activeCardContent = newFlowCards && newFlowCards.length ? newFlowCards[activeCardIndex] : null;
-        console.log('activeCardContent==>', activeCardContent);
+        console.log(newFlowCards);
         return(
             <ScrollView>
             <View style={styles.wrapper}>
@@ -137,17 +137,13 @@ export default class Cardpage extends React.Component {
                 </View>
                 <View>
                     {activeCardContent &&
-                        <View style={{ marginLeft:20, marginRight: 20, marginTop: 60, borderWidth: 1, borderColor: '#f5c200'  }}>
-                            <View style={{ padding: 5, backgroundColor: '#f5c200' }}>
-                                <Text style={{ textAlign: 'center', fontWeight: "bold", fontSize: 24, textTransform: 'uppercase', color: '#ffffff'}}>
+                        <View style={{ ...styles.cardWrapper, borderColor: COLOR_CODES[activeCardContent.card_type].headColor  }}>
+                            <View style={{ ...styles.titleContainer, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}>
+                                <Text style={ styles.title}>
                                     {navigation.state.params.chartData.title} - {activeCardContent.card_type}
                                 </Text>
                             </View>
-                            <View style={{ padding: 20, backgroundColor: '#fffcf2', justifyContent: 'center',
-                                alignItems: 'center',
-                                flexWrap: 'wrap',
-                                flexDirection:'row',
-                            }}>
+                            <View style={{ ...styles.cardBody, backgroundColor: COLOR_CODES[activeCardContent.card_type].bgColor }}>
                                 <HTMLView
                                     value={Base64.decode(activeCardContent.content)}
                                     stylesheet={styles}
@@ -160,25 +156,27 @@ export default class Cardpage extends React.Component {
                                                 this.handleNextButton(item)
                                             }}
                                             underlayColor='#fff'
-                                            style={{ justifyContent: 'center', alignItems: 'center', borderRadius: 5, paddingLeft: 20,  paddingRight: 20, height: 50, backgroundColor: '#f5c200', marginRight: 15 }}
+                                            style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
                                         >
-                                            <Text style={{ color: '#ffffff', fontSize: 16 }}>{ (item.content == '' || item.content == 'test') ? 'Next' : item.content}</Text>
+                                            <Text style={ styles.nxtBtnTxt }>
+                                                { (item.content == '' || item.content == 'test') ? 'Next' : item.content}
+                                            </Text>
                                         </TouchableOpacity>
                                     ))
                                     : <Fragment>
                                             <TouchableOpacity
                                                 onPress={ () => {}}
                                                 underlayColor='#fff'
-                                                style={{ justifyContent: 'center', alignItems: 'center', borderRadius: 5, paddingLeft: 20,  paddingRight: 20, height: 50, backgroundColor: '#f5c200', marginRight: 15 }}
+                                                style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
                                             >
-                                                <Text style={{ color: '#ffffff', fontSize: 16 }}>Save As Incident Report</Text>
+                                                <Text style={ styles.saveBtn }>Save As Incident Report</Text>
                                             </TouchableOpacity>
                                             <TouchableOpacity
                                                 onPress={ () => {}}
                                                 underlayColor='#fff'
-                                                style={{ justifyContent: 'center', alignItems: 'center', borderRadius: 5, paddingLeft: 20,  paddingRight: 20, height: 50, backgroundColor: '#f5c200' }}
+                                                style={{ ...styles.nxtBtn, marginTop: 50, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
                                             >
-                                                <Text style={{ color: '#ffffff', fontSize: 16 }}>Save As drill Log</Text>
+                                                <Text style={ styles.saveBtn }>Save As drill Log</Text>
                                             </TouchableOpacity>
                                       </Fragment>
                                 }
@@ -274,4 +272,46 @@ const styles = StyleSheet.create({
         flex:7,
         flexDirection: 'column',
     },
+
+    cardWrapper: {
+        marginLeft:20,
+        marginRight: 20,
+        marginTop: 60,
+        borderWidth: 1,
+        marginBottom: 50,
+    },
+    titleContainer: {
+        padding: 5,
+    },
+    title: {
+        textAlign: 'center',
+        fontWeight: "bold",
+        fontSize: 24,
+        textTransform: 'uppercase',
+        color: '#ffffff',
+    },
+    cardBody: {
+        padding: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        flexDirection:'row',
+    },
+    nxtBtn: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        paddingLeft: 20,
+        paddingRight: 20,
+        height: 50,
+        marginRight: 15,
+    },
+    nxtBtnTxt: {
+        color: '#ffffff',
+        fontSize: 16
+    },
+    saveBtn: {
+        color: '#ffffff',
+        fontSize: 16,
+    }
 });
