@@ -1,7 +1,7 @@
-android
-ios
-node_modules
-.idea
+android/
+ios/
+node_modules/
+.idea/
 .DS_Store
 __tests__
 yarn.lock

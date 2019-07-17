@@ -2,6 +2,7 @@ import React ,{Component, Fragment} from 'react';
 import { StyleSheet, Text, View, Platform,  Button, Image, TouchableOpacity, Navigate, ScrollView, props, StatusBar,Alert} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
+import Icon from "react-native-vector-icons/Ionicons";
 import HTMLView from 'react-native-htmlview';
 import Base64 from 'base-64'
 import { Fonts } from './src/utils/Fonts';
@@ -14,7 +15,12 @@ const MyStatusBar = ({backgroundColor, ...props}) => (
 );
 
 export default class Cardpage extends React.Component {
-    state={ flowChartCards: [], activeCardIndex: 0, newFlowCards: [] };
+    state={
+        flowChartCards: [],
+        activeCardIndex: 0,
+        newFlowCards: [],
+        breadcrumbs: [],
+    };
 
     async componentDidMount() {
         const safeguard = await AsyncStorage.getItem('safeguard');
@@ -24,14 +30,10 @@ export default class Cardpage extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { cards, chartid, actions, activeBreadCrumb } = nextProps;
+        const { cards, chartid, actions } = nextProps;
         if(this.props.chartid !== chartid) {
             this.initialState(cards, chartid, actions);
-            // this.props.resetBreadcrumb();
-        }
-        if(activeBreadCrumb && activeBreadCrumb.length){
-            const index = this.state.flowChartCards.indexOf(activeBreadCrumb[0]);
-            this.setState({activeCardIndex: index});
+            // this.resetBreadcrumb();
         }
     }
 
@@ -54,15 +56,14 @@ export default class Cardpage extends React.Component {
 
 
     handleNextButton = actionSelected => {
-        // const { resetActiveBreadCrumb } = this.props;
-        // resetActiveBreadCrumb();
+        this.resetActiveBreadCrumb();
         const { activeCardIndex, newFlowCards, flowChartCards } = this.state;
         const actionIndex = flowChartCards.findIndex(item => item.id === actionSelected.destination);
         this.setState({newFlowCards: [...newFlowCards, flowChartCards[actionIndex]], activeCardIndex: activeCardIndex + 1});
     };
 
     handlePrevButton = () => {
-        const { activeCardIndex, newFlowCards, flowChartCards } = this.state;
+        const { activeCardIndex, newFlowCards } = this.state;
         this.setState({
             newFlowCards: newFlowCards.filter((itm, idx) => idx !== newFlowCards.length-1),
             activeCardIndex: activeCardIndex - 1
@@ -88,28 +89,49 @@ export default class Cardpage extends React.Component {
         this.props.navigation.navigate('Login');
     };
 
+    addBreadcrumb = addNew => this.setState({ breadcrumbs: [ ...this.state.breadcrumbs, addNew ] });
+
+    resetActiveBreadCrumb = () => this.setState({activeBreadCrumb: []});
+
+    handleBreadCrumb = item => {
+        const index = this.state.flowChartCards.indexOf(item);
+        this.setState({
+            breadcrumbs: [...this.state.breadcrumbs, item],
+            activeCardIndex: index,
+        });
+    };
+
     render(){
-        const { newFlowCards, activeCardIndex } = this.state;
+        const { newFlowCards, activeCardIndex, breadcrumbs } = this.state;
         const { navigation } = this.props;
         const activeCardContent = newFlowCards && newFlowCards.length ? newFlowCards[activeCardIndex] : null;
-        console.log(newFlowCards);
         return(
             <ScrollView>
-            <View style={styles.wrapper}>
+                <View style={styles.wrapper}>
                 <MyStatusBar backgroundColor="#031537" barStyle="light-content" />
                 <View style={styles.header}>
                     <View style={styles.text}>
                         <View style={styles.logoimg}>
-                            <View>
-                                <View>
-                                    <Text style={styles.iconfont}>h</Text>
-                                </View>
-                            </View>
-                            <View style={{paddingLeft: 5, marginTop: 3,}}>
-                                <Text style={styles.logoText}>
-                                    Arodek
-                                </Text>
-                            </View>
+                            <TouchableOpacity
+                                underlayColor='#fff'
+                                style={{flexWrap: 'wrap',
+                                    flexDirection:'row',
+                                }}
+                                onPress={() => this.props.navigation.navigate('Home')}
+                            >
+                                <Fragment>
+                                    <View>
+                                        <View>
+                                            <Text style={styles.iconfont}>h</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{paddingLeft: 5, marginTop: 3,}}>
+                                        <Text style={styles.logoText}>
+                                            Arodek
+                                        </Text>
+                                    </View>
+                                </Fragment>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.rightnav}>
@@ -136,8 +158,46 @@ export default class Cardpage extends React.Component {
                     </View>
                 </View>
                 <View>
+                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                        <View style={{ flex: 1 }}>
+                            {(activeCardIndex >= 1) &&
+                            <Icon
+                                name="md-play"
+                                color="#000000"
+                                size={30}
+                                style={{ marginLeft:20, marginTop:20, transform: [{ rotate: '180deg'}] }}
+                                onPress={ this.handlePrevButton }
+                            />
+                            }
+                        </View>
+                        <View style={{ marginTop: 13, flex: 6, flexDirection: 'row', flexWrap: 'wrap', marginLeft: 50, marginRight: 50 }}>
+                            { breadcrumbs.length !== 0 && breadcrumbs.map(item => (
+                                <TouchableOpacity
+                                    onPress={ () => this.handleBreadCrumb(item) }
+                                    underlayColor='#fff'
+                                >
+                                    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                                        <View style={{
+                                            height: 12,
+                                            width: 12,
+                                            borderRadius: 30,
+                                            marginTop: 10,
+                                            backgroundColor: COLOR_CODES[item.card_type].headColor,
+                                        }} />
+                                        <Icon
+                                            name="md-link"
+                                            color="#000000"
+                                            size={10}
+                                            style={{ marginLeft: 5, marginRight: 5, marginTop: 10 }}
+                                            onPress={ this.handlePrevButton }
+                                        />
+                                    </View>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                    </View>
                     {activeCardContent &&
-                        <View style={{ ...styles.cardWrapper, borderColor: COLOR_CODES[activeCardContent.card_type].headColor  }}>
+                        <View style={{ ...styles.cardWrapper, marginTop: (activeCardIndex >= 1) ? 15 : 25,  borderColor: COLOR_CODES[activeCardContent.card_type].headColor  }}>
                             <View style={{ ...styles.titleContainer, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}>
                                 <Text style={ styles.title}>
                                     {navigation.state.params.chartData.title} - {activeCardContent.card_type}
@@ -147,39 +207,43 @@ export default class Cardpage extends React.Component {
                                 <HTMLView
                                     value={Base64.decode(activeCardContent.content)}
                                     stylesheet={styles}
+                                    addLineBreaks={false}
                                 />
-                                {
-                                    activeCardContent.actions.length ? activeCardContent.actions.map((item, idx) => (
-                                        <TouchableOpacity
-                                            key={ idx }
-                                            onPress={ () => {
-                                                this.handleNextButton(item)
-                                            }}
-                                            underlayColor='#fff'
-                                            style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
-                                        >
-                                            <Text style={ styles.nxtBtnTxt }>
-                                                { (item.content == '' || item.content == 'test') ? 'Next' : item.content}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    ))
-                                    : <Fragment>
-                                            <TouchableOpacity
-                                                onPress={ () => {}}
-                                                underlayColor='#fff'
-                                                style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
-                                            >
-                                                <Text style={ styles.saveBtn }>Save As Incident Report</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity
-                                                onPress={ () => {}}
-                                                underlayColor='#fff'
-                                                style={{ ...styles.nxtBtn, marginTop: 50, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
-                                            >
-                                                <Text style={ styles.saveBtn }>Save As drill Log</Text>
-                                            </TouchableOpacity>
-                                      </Fragment>
-                                }
+                                <View style={styles.btnWrapper}>
+                                    {
+                                        activeCardContent.actions.length ? activeCardContent.actions.map((item, idx) => (
+                                                <TouchableOpacity
+                                                    key={ idx }
+                                                    onPress={ () => {
+                                                        this.handleNextButton(item);
+                                                        this.addBreadcrumb(activeCardContent);
+                                                    }}
+                                                    underlayColor='#fff'
+                                                    style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
+                                                >
+                                                    <Text style={ styles.nxtBtnTxt }>
+                                                        { (item.content == '' || item.content == 'test') ? 'Next' : item.content}
+                                                    </Text>
+                                                </TouchableOpacity>
+                                            ))
+                                            : <Fragment>
+                                                <TouchableOpacity
+                                                    onPress={ () => {}}
+                                                    underlayColor='#fff'
+                                                    style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
+                                                >
+                                                    <Text style={ styles.saveBtn }>Save As Incident Report</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity
+                                                    onPress={ () => {}}
+                                                    underlayColor='#fff'
+                                                    style={{ ...styles.nxtBtn, marginTop: 50, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
+                                                >
+                                                    <Text style={ styles.saveBtn }>Save As Drill Log</Text>
+                                                </TouchableOpacity>
+                                            </Fragment>
+                                    }
+                                </View>
                             </View>
                         </View>
                     }
@@ -276,9 +340,8 @@ const styles = StyleSheet.create({
     cardWrapper: {
         marginLeft:20,
         marginRight: 20,
-        marginTop: 60,
         borderWidth: 1,
-        marginBottom: 50,
+        marginBottom: 50
     },
     titleContainer: {
         padding: 5,
@@ -294,24 +357,34 @@ const styles = StyleSheet.create({
         padding: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        flexWrap: 'wrap',
-        flexDirection:'row',
+        flexWrap: 'wrap'
+    },
+    btnWrapper: {
+        flexDirection: 'row',
+        alignSelf: 'center'
     },
     nxtBtn: {
+        flexShrink: 1,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
         paddingLeft: 20,
         paddingRight: 20,
         height: 50,
+        marginTop: 50,
         marginRight: 15,
     },
     nxtBtnTxt: {
         color: '#ffffff',
-        fontSize: 16
+        fontSize: 16,
+        textAlign: 'center',
     },
     saveBtn: {
         color: '#ffffff',
         fontSize: 16,
-    }
+        textAlign: 'center',
+    },
+    p: {
+        marginBottom: -50
+    },
 });
