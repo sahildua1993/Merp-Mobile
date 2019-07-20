@@ -134,7 +134,7 @@ export default class Charts extends React.Component {
                 underlayColor='#fff'>
 
                 <LinearGradient
-                 colors={['transparent', 'transparent','transparent', 'transparent', 'rgba(0, 0, 0, 0.3)']}
+                 colors={['transparent', 'transparent', 'rgba(0,0,0 , 0.2)']}
                  style={{alignItems: 'center', flex: 1, flexDirection: 'column', }}>
                 { index===indexnos ?
                 <View style={{position: 'absolute', right: 10, marginTop: 17,}}>
@@ -394,9 +394,10 @@ export default class Charts extends React.Component {
     loginScreenButton3:{
       //marginBottom:1,
       //paddingTop:12,
-      //paddingBottom:12,
+      // paddingBottom:12,
       backgroundColor:'#0d2a7a',
       borderBottomWidth: 1,
+      height: 60,
       borderBottomColor: 'rgba(255, 255, 255, 0.5)',
     },
     loginScreenButton4:{
@@ -412,7 +413,7 @@ export default class Charts extends React.Component {
         textAlign:'center',
         paddingLeft : 0,
         paddingRight : 0,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
         paddingTop: 12,
         paddingBottom: 12,

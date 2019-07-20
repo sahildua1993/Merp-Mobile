@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 import Icon from "react-native-vector-icons/Ionicons";
 import HTMLView from 'react-native-htmlview';
+import { pipe, replace, trim } from 'ramda';
 import Base64 from 'base-64'
 import { Fonts } from './src/utils/Fonts';
 import { COLOR_CODES } from './constants';
@@ -205,7 +206,7 @@ export default class Cardpage extends React.Component {
                             </View>
                             <View style={{ ...styles.cardBody, backgroundColor: COLOR_CODES[activeCardContent.card_type].bgColor }}>
                                 <HTMLView
-                                    value={Base64.decode(activeCardContent.content)}
+                                    value={(Base64.decode(activeCardContent.content))}
                                     stylesheet={styles}
                                     addLineBreaks={false}
                                 />
@@ -385,6 +386,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     p: {
-        marginBottom: -50
+        fontSize: 16,
+        marginTop: -15
     },
 });
