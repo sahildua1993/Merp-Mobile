@@ -1,7 +1,7 @@
 import React ,{Component, Fragment} from 'react';
 import { StyleSheet, Text, View, Platform,  Button, Image, TouchableOpacity, Navigate, ScrollView, props, StatusBar,Alert} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from "react-native-vector-icons/Ionicons";
 import HTMLView from 'react-native-htmlview';
 import Base64 from 'base-64'
@@ -117,12 +117,17 @@ export default class Cardpage extends React.Component {
                                 style={{flexWrap: 'wrap',
                                     flexDirection:'row',
                                 }}
-                                onPress={() => this.props.navigation.navigate('Home')}
+                                onPress={() => this.props.navigation.navigate('Charts', {collectionid: this.props.navigation.state.params.safeguard_charts_id, clickedChartId: navigation.state.params.chartData.id })}
                             >
                                 <Fragment>
                                     <View>
                                         <View>
-                                            <Text style={styles.iconfont}>h</Text>
+                                            <FontAwesome
+                                                name="bars"
+                                                color="#fff"
+                                                size={20}
+                                                style={styles.iconfont}
+                                            />
                                         </View>
                                     </View>
                                     <View style={{paddingLeft: 5, marginTop: 3,}}>
@@ -205,7 +210,7 @@ export default class Cardpage extends React.Component {
                             </View>
                             <View style={{ ...styles.cardBody, backgroundColor: COLOR_CODES[activeCardContent.card_type].bgColor }}>
                                 <HTMLView
-                                    value={(Base64.decode(activeCardContent.content))}
+                                    value={(Base64.decode(activeCardContent.content)).replace(/^\s+|\s+$/g, '')}
                                     stylesheet={styles}
                                     addLineBreaks={false}
                                 />
@@ -295,6 +300,7 @@ const styles = StyleSheet.create({
         fontFamily: Fonts.Safeguard,
         color:'#fff',
         fontSize:23,
+        marginLeft: 12,
     },
     logoimg: {
         paddingLeft: 5,
@@ -385,7 +391,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     p: {
-        fontSize: 16,
-        marginTop: -15
+        fontSize: 20,
+        textAlign: 'center',
+        marginLeft: -25,
+        paddingLeft: 15,
+        paddingRight: 15,
     },
+    ul: {
+        fontSize: 19,
+        paddingLeft: 10,
+    },
+    li: {
+        fontSize: 19,
+        textAlign: 'left',
+        paddingLeft: 10,
+    }
 });

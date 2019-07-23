@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { StyleSheet, Text, View, Platform,  Button, Image, TouchableOpacity, Navigate, ScrollView, props,ActivityIndicator, StatusBar,Alert} from 'react-native';
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import Icon from "react-native-vector-icons/FontAwesome";
 import { FlatList,  TouchableWithoutFeedback} from 'react-native';
 import  alaSQLSpace from 'alasql';
 import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Fonts } from './src/utils/Fonts';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
+import FontAwesome, { Icons, IconTypes } from 'react-native-fontawesome';
 
 global.indexnos='';
 
@@ -42,7 +42,6 @@ export default class Charts extends React.Component {
   }
 
   componentDidMount(){
-
      const { navigation } = this.props;
      var id= navigation.getParam('collectionid', 'NO-ID');
      AsyncStorage.getItem('safeguard',(err,safeguard_charts)=>{
@@ -125,7 +124,7 @@ export default class Charts extends React.Component {
 
   renderItem(data) {
     let { item, index } = data;
-
+    const { clickedChartId } = this.props.navigation.state.params;
     return (
       <TouchableOpacity onPress={ () => this.actionOnRow(item,index)}
                // style={(item.length-6)?styles.loginScreenButton3:styles.loginScreenButton4}
@@ -136,9 +135,15 @@ export default class Charts extends React.Component {
                 <LinearGradient
                  colors={['transparent', 'transparent', 'rgba(0,0,0 , 0.2)']}
                  style={{alignItems: 'center', flex: 1, flexDirection: 'column', }}>
-                { index===indexnos ?
-                <View style={{position: 'absolute', right: 10, marginTop: 17,}}>
-                  <FontAwesome name="exclamation-triangle" size={20} color="#fff" />
+                { item.id === clickedChartId ?
+                <View style={{position: 'absolute', right: 6, marginTop: 15 }}>
+                    <Icon
+                        name="exclamation-triangle"
+                        color="#fff"
+                        size={20}
+                        style={{ marginLeft: 5, marginRight: 5 }}
+                        onPress={ this.handlePrevButton }
+                    />
                 </View>
                  : null }
                 <Text style={styles.loginText}>{item.title.toString().toUpperCase()}</Text>
@@ -171,27 +176,30 @@ export default class Charts extends React.Component {
             <View style={styles.text}>
 
                 <View style={styles.logoimg}>
+                    <TouchableOpacity
+                        underlayColor='#fff'
+                        style={{flexWrap: 'wrap',
+                            flexDirection:'row',
+                        }}
+                        onPress={() => this.props.navigation.navigate('Home')}
+                    >
+                        <Fragment>
+                            <View>
+                                <View>
+                                    <Text style={styles.iconfont}>h</Text>
+                                </View>
+                            </View>
+                            <View style={{paddingLeft: 5, marginTop: 3,}}>
 
-                    <View>
+                                <Text style={styles.logoText}>
 
-                        <View>
+                                    Arodek
 
-                        <Text style={styles.iconfont}>h</Text>
+                                </Text>
 
-                        </View>
-
-                    </View>
-
-                    <View style={{paddingLeft: 5, marginTop: 3,}}>
-
-                        <Text style={styles.logoText}>
-
-                            Arodek
-
-                        </Text>
-
-                    </View>
-
+                            </View>
+                        </Fragment>
+                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -270,7 +278,10 @@ export default class Charts extends React.Component {
     }
 
   actionOnRow(item) {
-    this.props.navigation.navigate('Cardpage', { chartData: item });
+    this.props.navigation.navigate('Cardpage', {
+        safeguard_charts_id: this.state.safeguard_charts_id,
+        chartData: item,
+    });
   }
 }
 
