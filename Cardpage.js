@@ -391,5 +391,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
     },
-
+    p: {
+        fontSize: 20,
+        textAlign: 'center',
+        marginLeft: -25,
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+    ul: {
+        fontSize: 19,
+        paddingLeft: 10,
+    },
+    li: {
+        fontSize: 19,
+        textAlign: 'left',
+        paddingLeft: 10,
+    }
 });
