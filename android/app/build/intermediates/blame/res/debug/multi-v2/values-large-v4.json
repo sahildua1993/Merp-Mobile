@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/sahil-dua/MERP/mback/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
+            "outputFile": "/Users/TTN/mback_android/Merp-Mobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
             "map": [
                 {
-                    "source": "/home/sahil-dua/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/c68eb78d4b7f99d88033f916a9f25228/res/values-large-v4/values-large-v4.xml",
+                    "source": "/Users/TTN/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/83cb978eaaddcb949653e2b77c2bbcd7/res/values-large-v4/values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",

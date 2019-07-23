@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTMultipartStreamReader.m \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTMultipartStreamReader.h
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTMultipartStreamReader.m \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTMultipartStreamReader.h

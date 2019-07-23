@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/Libraries/Network/RCTDataRequestHandler.m \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/Libraries/Network/RCTDataRequestHandler.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestHandler.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestDelegate.h
+  /Users/TTN/mback/node_modules/react-native/Libraries/Network/RCTDataRequestHandler.m \
+  /Users/TTN/mback/node_modules/react-native/Libraries/Network/RCTDataRequestHandler.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestHandler.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestDelegate.h

@@ -1,18 +1,18 @@
 dependencies: \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/Libraries/Text/TextInput/Singleline/RCTSinglelineTextInputView.m \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/Libraries/Text/TextInput/Singleline/RCTSinglelineTextInputView.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/Libraries/Text/TextInput/RCTBaseTextInputView.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTView.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputDelegate.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputViewProtocol.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/Libraries/Text/TextInput/Singleline/RCTUITextField.h
+  /Users/TTN/mback/node_modules/react-native/Libraries/Text/TextInput/Singleline/RCTSinglelineTextInputView.m \
+  /Users/TTN/mback/node_modules/react-native/Libraries/Text/TextInput/Singleline/RCTSinglelineTextInputView.h \
+  /Users/TTN/mback/node_modules/react-native/Libraries/Text/TextInput/RCTBaseTextInputView.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTView.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
+  /Users/TTN/mback/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputDelegate.h \
+  /Users/TTN/mback/node_modules/react-native/Libraries/Text/TextInput/RCTBackedTextInputViewProtocol.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/TTN/mback/node_modules/react-native/Libraries/Text/TextInput/Singleline/RCTUITextField.h

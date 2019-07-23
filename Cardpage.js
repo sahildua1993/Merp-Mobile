@@ -4,7 +4,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 import Icon from "react-native-vector-icons/Ionicons";
 import HTMLView from 'react-native-htmlview';
-import { pipe, replace, trim } from 'ramda';
 import Base64 from 'base-64'
 import { Fonts } from './src/utils/Fonts';
 import { COLOR_CODES } from './constants';

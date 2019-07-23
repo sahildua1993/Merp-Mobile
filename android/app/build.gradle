@@ -138,6 +138,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-device-info')
+    implementation project(':react-native-push-notification')
     implementation project(':react-native-linear-gradient')
     implementation project(':react-native-vector-icons')
     implementation project(':@react-native-community_async-storage')

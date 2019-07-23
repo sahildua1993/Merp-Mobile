@@ -1,22 +1,22 @@
 dependencies: \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/ScrollView/RCTScrollContentView.m \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/ScrollView/RCTScrollContentView.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/RCTView.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/RCTBorderStyle.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/RCTComponent.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/RCTPointerEvents.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTAssert.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTDefines.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/UIView+React.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
-  /Users/arodek/Desktop/Merp/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/ScrollView/RCTScrollView.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/RCTAutoInsetsProtocol.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTEventDispatcher.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTBridge.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTBridgeModule.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTFrameUpdate.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Base/RCTInvalidating.h \
-  /Users/arodek/Desktop/Merp/node_modules/react-native/React/Views/ScrollView/RCTScrollableProtocol.h
+  /Users/TTN/mback/node_modules/react-native/React/Views/ScrollView/RCTScrollContentView.m \
+  /Users/TTN/mback/node_modules/react-native/React/Views/ScrollView/RCTScrollContentView.h \
+  /Users/TTN/mback/node_modules/react-native/React/Views/RCTView.h \
+  /Users/TTN/mback/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/TTN/mback/node_modules/react-native/React/Views/RCTComponent.h \
+  /Users/TTN/mback/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/TTN/mback/node_modules/react-native/React/Views/UIView+React.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/TTN/mback/ios/build/Merp/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/TTN/mback/node_modules/react-native/React/Views/ScrollView/RCTScrollView.h \
+  /Users/TTN/mback/node_modules/react-native/React/Views/RCTAutoInsetsProtocol.h \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/TTN/mback/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/TTN/mback/node_modules/react-native/React/Views/ScrollView/RCTScrollableProtocol.h
