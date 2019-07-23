@@ -335,7 +335,7 @@ this.props.navigation.navigate('Login');
 
                         <LinearGradient
 
-                    colors={['transparent', 'transparent','transparent', 'transparent', 'rgba(0, 0, 0, 0.3)']}
+                    colors={['transparent', 'transparent','transparent', 'rgba(0, 0, 0, 0.2)']}
 
                     style={{alignItems: 'center', flex: 1, flexDirection: 'column', }}>
 
@@ -361,7 +361,7 @@ this.props.navigation.navigate('Login');
 
                         <LinearGradient
 
-                    colors={['transparent', 'transparent','transparent', 'transparent', 'rgba(0, 0, 0, 0.3)']}
+                    colors={['transparent', 'transparent','transparent', 'rgba(0, 0, 0, 0.2)']}
 
                     style={{alignItems: 'center', flex:1, flexDirection: 'column', }}>
 
@@ -395,7 +395,7 @@ this.props.navigation.navigate('Login');
 
                         <LinearGradient
 
-                    colors={['transparent', 'transparent','transparent', 'transparent', 'rgba(0, 0, 0, 0.3)']}
+                    colors={['transparent', 'transparent','transparent', 'rgba(0, 0, 0, 0.2)']}
 
                     style={{alignItems: 'center', flex: 1, flexDirection: 'column', }}>
 
@@ -421,7 +421,7 @@ this.props.navigation.navigate('Login');
 
                         <LinearGradient
 
-                    colors={['transparent', 'transparent','transparent', 'transparent', 'rgba(0, 0, 0, 0.3)']}
+                    colors={['transparent', 'transparent','transparent', 'rgba(0, 0, 0, 0.2)']}
 
                     style={{alignItems: 'center', flex: 1, flexDirection: 'column', }}>
 
@@ -483,7 +483,7 @@ this.props.navigation.navigate('Login');
 
                 
 
-                 <LinearGradient colors={['transparent', 'transparent','transparent', 'transparent', 'rgba(0, 0, 0, 0.3)']} style={styles.linearGradient}>
+                 <LinearGradient colors={['transparent', 'transparent','transparent', 'rgba(0, 0, 0, 0.3)']} style={styles.linearGradient}>
 
                  <Text style={styles.loginText2}>{item.title.toString().toUpperCase()}</Text>
 
@@ -667,7 +667,7 @@ const styles = StyleSheet.create({
 
             overflow: 'hidden',
 
-            height: 50,
+            height: 53,
 
             },
 
@@ -689,26 +689,16 @@ const styles = StyleSheet.create({
 
               overflow: 'hidden',
 
-              height: 50,
+              height: 53,
 
             },
 
        
 
             loginScreenButton3:{
-
               marginBottom:1,
-
               backgroundColor:'#0d2a7a',
-
-              //paddingLeft: 10,
-
-              //paddingRight: 10,
-
-       
-
-        
-
+                minHeight: 60,
             },
 
        
@@ -723,13 +713,13 @@ const styles = StyleSheet.create({
 
                 paddingRight : 0,
 
-                fontSize: 17,
+                fontSize: 18,
 
                 fontWeight: 'bold',
 
-                paddingTop:19,
+                paddingTop:23,
 
-                paddingBottom:12,
+                paddingBottom:0,
 
                 flex:1,
 
@@ -752,11 +742,11 @@ const styles = StyleSheet.create({
                 color:'#fff',
 
                 textAlign:'center',
-                fontSize: 17,
+                fontSize: 18,
 
                 fontWeight: 'bold',
 
-                paddingTop:9,
+                paddingTop:12,
 
 
                 flex:1,
@@ -783,15 +773,11 @@ const styles = StyleSheet.create({
 
               textAlign:'center',
 
-              paddingLeft : 0,
-
-              paddingRight : 0,
-
-              fontSize: 17,
+              fontSize: 18,
 
               fontWeight: 'bold',
 
-              paddingTop:15,
+              paddingTop:18,
 
               paddingBottom:15,
 
