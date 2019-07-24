@@ -1,7 +1,7 @@
 
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, {Component, Fragment} from 'react';
+import {Platform, StyleSheet, Text, View, Image} from 'react-native';
 
 import { Fonts } from './src/utils/Fonts';
 import Home from './Home';
@@ -52,7 +52,9 @@ const AppContainer = createAppContainer(RootStack);
 export default class App extends React.Component {
   render() {
     return (
-      <AppContainer/>
+        <Fragment>
+            <AppContainer/>
+        </Fragment>
     );
   }
 }
