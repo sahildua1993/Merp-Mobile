@@ -294,13 +294,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingRight: 10,
+        paddingRight: 25,
     },
     iconfont:{
         fontFamily: Fonts.Safeguard,
         color:'#fff',
         fontSize:23,
-        marginLeft: 12,
+        marginLeft: 10,
     },
     logoimg: {
         paddingLeft: 5,
