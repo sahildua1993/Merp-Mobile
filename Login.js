@@ -414,10 +414,7 @@ export default class Login extends React.Component {
 
     <View >
 
-     <Image source={{uri: 'https://mobileemergencyresponseplans.com/images/watermark.png'}}
-
-       style={{width: 300, height: 80}} />
-
+     <Image source={require('./assets/watermark.png')} style={{width: 300, height: 80}} />
     </View>
 
     </View>
@@ -446,7 +443,7 @@ const styles = StyleSheet.create({
 
     flex: 1,
 
-    paddingTop: 20,
+    paddingTop: 50,
 
     paddingBottom: 20,
 
@@ -493,7 +490,7 @@ const styles = StyleSheet.create({
   blnkbottom: {
 
     flex: 3,
-
+    marginTop: 40,
     justifyContent: 'center',
 
     alignItems: 'center',
