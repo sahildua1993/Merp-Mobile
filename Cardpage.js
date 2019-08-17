@@ -28,9 +28,11 @@ export default class Cardpage extends React.Component {
             date: new Date(),
             text: 'Active logging began',
         }],
+        showStaticDrawer: false,
         showDrawer: false,
         isTextboxSelected: false,
         addNoteText: '',
+        staticData: {},
     };
 
     async componentDidMount() {
@@ -38,6 +40,15 @@ export default class Cardpage extends React.Component {
         const _safeguard = JSON.parse(safeguard);
         const { navigation } = this.props;
         this.initialState(_safeguard.cards, navigation.state.params.chartData.id, _safeguard.actions);
+        const data = _safeguard.charts.find(item => item.id === navigation.state.params.chartData.id);
+        if(data) {
+            this.setState({
+                staticData: {
+                    title: data.supporting_materials_title,
+                    content: data.supporting_materials_content
+                }
+            });
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -143,6 +154,8 @@ export default class Cardpage extends React.Component {
         });
     };
 
+    handleStaticDrawer = () => this.setState(prevState => ({ showStaticDrawer: !prevState.showStaticDrawer }));
+
     handleDrawer = () => this.setState(prevState => ({ showDrawer: !prevState.showDrawer }));
 
     handleAddNote = () => {
@@ -211,7 +224,7 @@ export default class Cardpage extends React.Component {
     };
 
     render(){
-        const { newFlowCards, activeCardIndex, breadcrumbs, showDrawer, isTextboxSelected, drawerDataList } = this.state;
+        const { newFlowCards, activeCardIndex, breadcrumbs, showDrawer, isTextboxSelected, drawerDataList, showStaticDrawer, staticData } = this.state;
         const { navigation } = this.props;
         const activeCardContent = newFlowCards && newFlowCards.length ? newFlowCards[activeCardIndex] : null;
         return(
@@ -366,11 +379,98 @@ export default class Cardpage extends React.Component {
                         </View>
                     </View>
                 </ScrollView>
-                <TouchableOpacity style={{ position: 'absolute', bottom: 30, right: showDrawer ? '85%' : 0 }} onPress={ this.handleDrawer }>
-                    <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                    style={{
+                        position: 'absolute',
+                        backgroundColor: '#031537',
+                        bottom: 120,
+                        borderBottomLeftRadius: 4,
+                        borderTopLeftRadius: 4,
+                        right: showStaticDrawer ? '85%' : 0
+                    }}
+                    onPress={ this.handleStaticDrawer }
+                >
+                    <View style={{
+                        height: 70,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}>
+                        <Image source={require('./assets/event_aid_icon.png')} />
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: '#031537',
+                        position: 'absolute',
+                        bottom: 30,
+                        borderBottomLeftRadius: 4,
+                        borderTopLeftRadius: 4,
+                        right: showDrawer ? '85%' : 0
+                    }}
+                    onPress={ this.handleDrawer }
+                >
+                    <View style={{
+                        height: 70,
+                        width: 50,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}>
                         <Image source={require('./assets/incident_log_icon.png')} />
                     </View>
                 </TouchableOpacity>
+                { showStaticDrawer && staticData.title && staticData.content &&
+                    <View style={{
+                        position: 'absolute',
+                        height: '100%',
+                        width: '85%',
+                        right: 0,
+                        border: 2,
+                        borderLeftWidth:6,
+                        borderColor: '#031537',
+                        marginTop: Platform.OS === 'ios' ? 75 : 80,
+                    }}>
+                        <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#ffffff' }}>
+                            <ScrollView>
+                                    <View style={{
+                                        marginTop: 18,
+                                        backgroundColor: 'darkblue',
+                                        paddingTop: 15,
+                                        paddingBottom: 15,
+                                    }}>
+                                        <Text style={{
+                                            textAlign: 'center',
+                                            fontSize: 18,
+                                            fontWeight: 'bold',
+                                            color: '#ffffff',
+                                        }}>{ staticData.title }</Text>
+                                    </View>
+
+                                    <HTMLView
+                                        style={{
+                                            paddingTop: 20,
+                                            paddingBottom: 170,
+                                            paddingLeft: 20,
+                                            paddingRight: 20,
+                                        }}
+                                        value={(staticData.content)}
+                                        stylesheet={{
+                                            h3: {
+
+                                                paddingTop: 10,
+                                                fontSize: 22,
+                                                fontWeight: 'bold',
+                                            },
+                                            p: {
+                                                fontSize: 16,
+                                            },
+                                        }}
+                                        addLineBreaks
+                                    />
+                            </ScrollView>
+                        </View>
+                    </View>
+                }
                 { showDrawer &&
                     <View style={{
                         zIndex: 5,
