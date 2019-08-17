@@ -353,7 +353,7 @@ this.props.navigation.navigate('Login');
 
                     style={styles.loginScreenButton}
 
-                    onPress={() => this.props.navigation.navigate('Activeshooter')}
+                    onPress={() => this.props.navigation.navigate('ActiveShooter')}
 
                     underlayColor='#fff'>
 
@@ -508,7 +508,13 @@ this.props.navigation.navigate('Login');
         </View>
 
           </View>
-
+            <View style={{flex: 1,
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                paddingBottom: 50,
+            }}>
+                <Image source={require('./assets/watermark.png')} style={{width: 300, height: 80}} />
+            </View>
         </View>
 
      

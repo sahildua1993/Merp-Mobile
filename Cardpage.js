@@ -451,8 +451,7 @@ export default class Cardpage extends React.Component {
                                             paddingTop: 20,
                                             paddingBottom: 170,
                                             paddingLeft: 20,
-                                            paddingRight: 20,
-                                        }}
+                                            paddingRight: 20, }}
                                         value={(staticData.content)}
                                         stylesheet={{
                                             h3: {
