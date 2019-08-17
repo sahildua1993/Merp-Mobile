@@ -198,7 +198,7 @@ export default class Cardpage extends React.Component {
                         name="md-close"
                         color="#730e12"
                         size={30}
-                        style={{ position: 'absolute', right:10, zIndex: 10 }}
+                        style={{ position: 'absolute', right:10, zIndex: 10, top: 10 }}
                         onPress={ () => this.handleDeleteNote(item) }
                     />
                 }
@@ -381,7 +381,7 @@ export default class Cardpage extends React.Component {
                         border: 2,
                         borderLeftWidth:6,
                         borderColor: '#031537',
-                        marginTop: Platform.OS === 'ios' ? 80 : 80,
+                        marginTop: Platform.OS === 'ios' ? 75 : 80,
                     }}>
                         <View style={{ flex: 1, flexDirection: 'column' }}>
                             <View style={{
