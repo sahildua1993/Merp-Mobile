@@ -1,6 +1,7 @@
 import React ,{Component, Fragment} from 'react';
-import { StyleSheet, Text, View, Platform,  Button, Image, TouchableOpacity, Navigate, ScrollView, props, StatusBar,Alert} from 'react-native';
+import { TextInput, Keyboard, StyleSheet, Text, View, Platform,  Button, Image, TouchableOpacity, Navigate, ScrollView, props, StatusBar,Alert, FlatList} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import moment from 'moment';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from "react-native-vector-icons/Ionicons";
 import HTMLView from 'react-native-htmlview';
@@ -21,6 +22,15 @@ export default class Cardpage extends React.Component {
         activeCardIndex: 0,
         newFlowCards: [],
         breadcrumbs: [],
+        drawerDataList: [{
+            isEdit: false,
+            key: Date.now(),
+            date: new Date(),
+            text: 'Active logging began',
+        }],
+        showDrawer: false,
+        isTextboxSelected: false,
+        addNoteText: '',
     };
 
     async componentDidMount() {
@@ -60,14 +70,36 @@ export default class Cardpage extends React.Component {
         this.resetActiveBreadCrumb();
         const { activeCardIndex, newFlowCards, flowChartCards } = this.state;
         const actionIndex = flowChartCards.findIndex(item => item.id === actionSelected.destination);
-        this.setState({newFlowCards: [...newFlowCards, flowChartCards[actionIndex]], activeCardIndex: activeCardIndex + 1});
+        this.setState({
+            newFlowCards: [...newFlowCards, flowChartCards[actionIndex]],
+            activeCardIndex: activeCardIndex + 1,
+            drawerDataList: [
+                ...this.state.drawerDataList,
+                {
+                    isEdit: false,
+                    key: Date.now(),
+                    date: new Date,
+                    text: `Moved forward to ${flowChartCards[actionIndex].card_type}(${actionSelected.destination})`
+                }
+            ]
+        });
     };
 
     handlePrevButton = () => {
         const { activeCardIndex, newFlowCards } = this.state;
+        const actionIndex = newFlowCards.filter((itm, idx) => idx !== newFlowCards.length-1);
         this.setState({
-            newFlowCards: newFlowCards.filter((itm, idx) => idx !== newFlowCards.length-1),
-            activeCardIndex: activeCardIndex - 1
+            newFlowCards: actionIndex,
+            activeCardIndex: activeCardIndex - 1,
+            drawerDataList: [
+                ...this.state.drawerDataList,
+                {
+                    isEdit: false,
+                    key: Date.now(),
+                    date: new Date,
+                    text: `Moved back to (${actionIndex[actionIndex.length-1].id})`
+                }
+            ]
         });
     };
 
@@ -99,17 +131,91 @@ export default class Cardpage extends React.Component {
         this.setState({
             breadcrumbs: [...this.state.breadcrumbs, item],
             activeCardIndex: index,
+            drawerDataList: [
+                ...this.state.drawerDataList,
+                {
+                    isEdit: false,
+                    key: Date.now(),
+                    date: new Date,
+                    text: `Rollback to ${item.card_type}(${item.id}) back via Breadcrumb.`
+                }
+            ]
         });
     };
 
+    handleDrawer = () => this.setState(prevState => ({ showDrawer: !prevState.showDrawer }));
+
+    handleAddNote = () => {
+        Keyboard.dismiss();
+        this.setState({
+            drawerDataList: [
+                ...this.state.drawerDataList,
+                {
+                    isEdit: true,
+                    key: Date.now(),
+                    date: new Date,
+                    text: this.state.addNoteText,
+                }
+            ],
+            addNoteText: ''
+        });
+    };
+
+    handleDeleteNote = data => {
+        const { drawerDataList } = this.state;
+        this.setState({
+            drawerDataList: drawerDataList.filter(item => item.key !== data.key),
+        });
+    };
+
+    handleDrawerData = ({ item }) => {
+      return (
+        <View style={{
+            flex: 1,
+            height: 150,
+            borderBottomWidth:1,
+            borderColor: '#031537',
+            flexDirection: 'row',
+        }}>
+            <View style={{
+                flex: 3,
+                backgroundColor: '#dde5fb',
+                alignItems: 'center'
+            }}>
+                <Text style={{textAlign: 'center', paddingTop: 15, paddingLeft: 17, paddingRight: 17 }}>
+                    {moment(item.date).format('ddd LL LTS')}
+                </Text>
+            </View>
+            <View style={{
+                flex: 7,
+                paddingLeft: 10,
+                backgroundColor: '#bbcbf8',
+                borderLeftWidth:1,
+                borderColor: '#031537',
+            }}>
+                {item.isEdit &&
+                    <Icon
+                        name="md-close"
+                        color="#730e12"
+                        size={30}
+                        style={{ position: 'absolute', right:10, zIndex: 10 }}
+                        onPress={ () => this.handleDeleteNote(item) }
+                    />
+                }
+                <Text style={{ paddingTop: 15, paddingLeft: 10, paddingRight: 25 }}>
+                    {item.text}
+                </Text>
+            </View>
+        </View>
+      );
+    };
+
     render(){
-        const { newFlowCards, activeCardIndex, breadcrumbs } = this.state;
+        const { newFlowCards, activeCardIndex, breadcrumbs, showDrawer, isTextboxSelected, drawerDataList } = this.state;
         const { navigation } = this.props;
         const activeCardContent = newFlowCards && newFlowCards.length ? newFlowCards[activeCardIndex] : null;
         return(
-            <ScrollView>
-                <View style={styles.wrapper}>
-                <MyStatusBar backgroundColor="#031537" barStyle="light-content" />
+            <Fragment>
                 <View style={styles.header}>
                     <View style={styles.text}>
                         <View style={styles.logoimg}>
@@ -163,99 +269,165 @@ export default class Cardpage extends React.Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View>
-                    <View style={{ flexDirection: 'row', flex: 1 }}>
-                        <View style={{ flex: 1 }}>
-                            {(activeCardIndex >= 1) &&
-                            <Icon
-                                name="md-play"
-                                color="#000000"
-                                size={30}
-                                style={{ marginLeft:20, marginTop:20, transform: [{ rotate: '180deg'}] }}
-                                onPress={ this.handlePrevButton }
-                            />
-                            }
-                        </View>
-                        <View style={{ marginTop: 13, flex: 6, flexDirection: 'row', flexWrap: 'wrap', marginLeft: 50, marginRight: 50 }}>
-                            { breadcrumbs.length !== 0 && breadcrumbs.map(item => (
-                                <TouchableOpacity
-                                    onPress={ () => this.handleBreadCrumb(item) }
-                                    underlayColor='#fff'
-                                >
-                                    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                                        <View style={{
-                                            height: 12,
-                                            width: 12,
-                                            borderRadius: 30,
-                                            marginTop: 10,
-                                            backgroundColor: COLOR_CODES[item.card_type].headColor,
-                                        }} />
-                                        <Icon
-                                            name="md-link"
-                                            color="#000000"
-                                            size={10}
-                                            style={{ marginLeft: 5, marginRight: 5, marginTop: 10 }}
-                                            onPress={ this.handlePrevButton }
-                                        />
-                                    </View>
-                                </TouchableOpacity>
-                            ))}
-                        </View>
-                    </View>
-                    {activeCardContent &&
-                        <View style={{ ...styles.cardWrapper, marginTop: (activeCardIndex >= 1) ? 15 : 25,  borderColor: COLOR_CODES[activeCardContent.card_type].headColor  }}>
-                            <View style={{ ...styles.titleContainer, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}>
-                                <Text style={ styles.title}>
-                                    {navigation.state.params.chartData.title} - {activeCardContent.card_type}
-                                </Text>
-                            </View>
-                            <View style={{ ...styles.cardBody, backgroundColor: COLOR_CODES[activeCardContent.card_type].bgColor }}>
-                                <HTMLView
-                                    value={(Base64.decode(activeCardContent.content)).replace(/^\s+|\s+$/g, '')}
-                                    stylesheet={styles}
-                                    addLineBreaks={false}
-                                />
-                                <View style={styles.btnWrapper}>
-                                    {
-                                        activeCardContent.actions.length ? activeCardContent.actions.map((item, idx) => (
-                                                <TouchableOpacity
-                                                    key={ idx }
-                                                    onPress={ () => {
-                                                        this.handleNextButton(item);
-                                                        this.addBreadcrumb(activeCardContent);
-                                                    }}
-                                                    underlayColor='#fff'
-                                                    style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
-                                                >
-                                                    <Text style={ styles.nxtBtnTxt }>
-                                                        { (item.content == '' || item.content == 'test') ? 'Next' : item.content}
-                                                    </Text>
-                                                </TouchableOpacity>
-                                            ))
-                                            : <Fragment>
-                                                <TouchableOpacity
-                                                    onPress={ () => {}}
-                                                    underlayColor='#fff'
-                                                    style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
-                                                >
-                                                    <Text style={ styles.saveBtn }>Save As Incident Report</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity
-                                                    onPress={ () => {}}
-                                                    underlayColor='#fff'
-                                                    style={{ ...styles.nxtBtn, marginTop: 50, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
-                                                >
-                                                    <Text style={ styles.saveBtn }>Save As Drill Log</Text>
-                                                </TouchableOpacity>
-                                            </Fragment>
+                <ScrollView>
+                    <View style={styles.wrapper}>
+                        <MyStatusBar backgroundColor="#031537" barStyle="light-content" />
+
+                        <View>
+                            <View style={{ flexDirection: 'row', flex: 1 }}>
+                                <View style={{ flex: 1 }}>
+                                    {(activeCardIndex >= 1) &&
+                                    <Icon
+                                        name="md-play"
+                                        color="#000000"
+                                        size={30}
+                                        style={{ marginLeft:20, marginTop:20, transform: [{ rotate: '180deg'}] }}
+                                        onPress={ this.handlePrevButton }
+                                    />
                                     }
                                 </View>
+                                <View style={{ marginTop: 13, flex: 6, flexDirection: 'row', flexWrap: 'wrap', marginLeft: 50, marginRight: 50 }}>
+                                    { breadcrumbs.length !== 0 && breadcrumbs.map(item => (
+                                        <TouchableOpacity
+                                            onPress={ () => this.handleBreadCrumb(item) }
+                                            underlayColor='#fff'
+                                        >
+                                            <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                                                <View style={{
+                                                    height: 12,
+                                                    width: 12,
+                                                    borderRadius: 30,
+                                                    marginTop: 10,
+                                                    backgroundColor: COLOR_CODES[item.card_type].headColor,
+                                                }} />
+                                                <Icon
+                                                    name="md-link"
+                                                    color="#000000"
+                                                    size={10}
+                                                    style={{ marginLeft: 5, marginRight: 5, marginTop: 10 }}
+                                                    onPress={ () => this.handlePrevButton(item) }
+                                                />
+                                            </View>
+                                        </TouchableOpacity>
+                                    ))}
+                                </View>
+                            </View>
+                            {activeCardContent &&
+                            <View style={{ ...styles.cardWrapper, marginTop: (activeCardIndex >= 1) ? 15 : 25,  borderColor: COLOR_CODES[activeCardContent.card_type].headColor  }}>
+                                <View style={{ ...styles.titleContainer, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}>
+                                    <Text style={ styles.title}>
+                                        {navigation.state.params.chartData.title} - {activeCardContent.card_type}
+                                    </Text>
+                                </View>
+                                <View style={{ ...styles.cardBody, backgroundColor: COLOR_CODES[activeCardContent.card_type].bgColor }}>
+                                    <HTMLView
+                                        value={(Base64.decode(activeCardContent.content)).replace(/^\s+|\s+$/g, '')}
+                                        stylesheet={styles}
+                                        addLineBreaks={false}
+                                    />
+                                    <View style={styles.btnWrapper}>
+                                        {
+                                            activeCardContent.actions.length ? activeCardContent.actions.map((item, idx) => (
+                                                    <TouchableOpacity
+                                                        key={ idx }
+                                                        onPress={ () => {
+                                                            this.handleNextButton(item);
+                                                            this.addBreadcrumb(activeCardContent);
+                                                        }}
+                                                        underlayColor='#fff'
+                                                        style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
+                                                    >
+                                                        <Text style={ styles.nxtBtnTxt }>
+                                                            { (item.content == '' || item.content == 'test') ? 'Next' : item.content}
+                                                        </Text>
+                                                    </TouchableOpacity>
+                                                ))
+                                                : <Fragment>
+                                                    <TouchableOpacity
+                                                        onPress={ () => {}}
+                                                        underlayColor='#fff'
+                                                        style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
+                                                    >
+                                                        <Text style={ styles.saveBtn }>Save As Incident Report</Text>
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity
+                                                        onPress={ () => {}}
+                                                        underlayColor='#fff'
+                                                        style={{ ...styles.nxtBtn, marginTop: 50, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
+                                                    >
+                                                        <Text style={ styles.saveBtn }>Save As Drill Log</Text>
+                                                    </TouchableOpacity>
+                                                </Fragment>
+                                        }
+                                    </View>
+                                </View>
+                            </View>
+                            }
+                        </View>
+                    </View>
+                </ScrollView>
+                <TouchableOpacity style={{ position: 'absolute', bottom: 30, right: showDrawer ? '85%' : 0 }} onPress={ this.handleDrawer }>
+                    <View style={{ flex: 1 }}>
+                        <Image source={require('./assets/incident_log_icon.png')} />
+                    </View>
+                </TouchableOpacity>
+                { showDrawer &&
+                    <View style={{
+                        zIndex: 5,
+                        position: 'absolute',
+                        height: '100%',
+                        width: '85%',
+                        right: 0,
+                        border: 2,
+                        borderLeftWidth:6,
+                        borderColor: '#031537',
+                        marginTop: Platform.OS === 'ios' ? 80 : 80,
+                    }}>
+                        <View style={{ flex: 1, flexDirection: 'column' }}>
+                            <View style={{
+                                flex:  isTextboxSelected ? 1 : 4 ,
+                                backgroundColor: '#e6e6e6',
+                            }}>
+                                <FlatList
+                                    keyExtractor={ item => item.key }
+                                    data={ drawerDataList }
+                                    renderItem={ this.handleDrawerData }
+                                />
+                            </View>
+                            <View style={{
+                                flex: 2,
+                                backgroundColor: '#ffffff',
+                            }}>
+                                <TextInput
+                                    placeholder={'Enter your notes here.'}
+                                    placeholderTextColor={'lightgrey'}
+                                    style={{ paddingLeft: 20 }}
+                                    value={ this.state.addNoteText }
+                                    onChangeText={ value => this.setState({ addNoteText: value }) }
+                                    onFocus={() => this.setState({ isTextboxSelected: true }) }
+                                    onBlur={() => this.setState({ isTextboxSelected: false }) }
+                                />
+                            </View>
+                            <View style={{
+                                flex: 2,
+                                backgroundColor: 'darkblue',
+                                justifyContent: 'center',
+                            }}>
+                                <TouchableOpacity
+                                    onPress={ this.handleAddNote }
+                                >
+                                    <Text style={{
+                                        color: '#ffffff',
+                                        textAlign: 'center',
+                                        marginBottom: 80,
+                                        fontSize: 16,
+                                    }}>Add Note</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
-                    }
-                </View>
-            </View>
-            </ScrollView>
+                    </View>
+                }
+            </Fragment>
         )
     }
 }
