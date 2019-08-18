@@ -12,6 +12,7 @@ import Allmessage from './Allmessage';
 import Sendmessage from './Sendmessage';
 import Replymessage from './Replymessage';
 import Filescreen from './Filescreen';
+import Emergency from './Emergency';
 
 import Charts from './Charts';
 import Cardpage from './Cardpage';
@@ -34,6 +35,8 @@ const RootStack = createSwitchNavigator(
     Profile : { screen: Profile },
     Icons : { screen: Icons} ,
     Allmessage : { screen : Allmessage },
+    Emergency : { screen : Emergency },
+    ActiveShooter : { screen : Emergency },
     Sendmessage : { screen : Sendmessage },
     Replymessage : { screen : Replymessage },
     Filescreen : { screen : Filescreen },
