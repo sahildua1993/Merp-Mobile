@@ -5,6 +5,7 @@ import { Fonts } from './src/utils/Fonts';
 
 export default class Emergency extends Component {
     render(){
+        const { defaultValue } = this.props;
         return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -63,7 +64,7 @@ export default class Emergency extends Component {
             <View style={{ height: 250, backgroundColor: 'rgba(220,20,20,.85)'}}>
                 <Text style={styles.textWrapper}>Urgent Message</Text>
                 <Picker
-                    selectedValue={'emergency'}
+                    selectedValue={defaultValue}
                     style={styles.inputField}
                 >
                     <Picker.Item label="Active Shooter" value="activeShooter" />

@@ -80,6 +80,7 @@ export default class Cardpage extends React.Component {
         this.resetActiveBreadCrumb();
         const { activeCardIndex, newFlowCards, flowChartCards } = this.state;
         const actionIndex = flowChartCards.findIndex(item => item.id === actionSelected.destination);
+        const currentIndex = flowChartCards.findIndex(item => item.id === actionSelected.card_id);
         this.setState({
             newFlowCards: [...newFlowCards, flowChartCards[actionIndex]],
             activeCardIndex: activeCardIndex + 1,
@@ -89,6 +90,9 @@ export default class Cardpage extends React.Component {
                     isEdit: false,
                     key: Date.now(),
                     date: new Date,
+                    source: actionSelected.card_id,
+                    destination: actionSelected.destination,
+                    type: flowChartCards[currentIndex].card_type,
                     text: `Moved forward to ${flowChartCards[actionIndex].card_type}(${actionSelected.destination})`
                 }
             ]
@@ -107,6 +111,9 @@ export default class Cardpage extends React.Component {
                     isEdit: false,
                     key: Date.now(),
                     date: new Date,
+                    source: newFlowCards[newFlowCards.length - 1].id,
+                    destination: actionIndex[actionIndex.length - 1].id,
+                    type: newFlowCards[newFlowCards.length - 1].card_type,
                     text: `Moved back to (${actionIndex[actionIndex.length-1].id})`
                 }
             ]
@@ -147,6 +154,9 @@ export default class Cardpage extends React.Component {
                     isEdit: false,
                     key: Date.now(),
                     date: new Date,
+                    source: this.state.newFlowCards[this.state.newFlowCards.length - 1].id,
+                    destination: item.id,
+                    type: this.state.newFlowCards[this.state.newFlowCards.length - 1].card_type,
                     text: `Rollback to ${item.card_type}(${item.id}) back via Breadcrumb.`
                 }
             ]
@@ -220,6 +230,58 @@ export default class Cardpage extends React.Component {
             </View>
         </View>
       );
+    };
+
+    saveData = async type => {
+        const { drawerDataList } = this.state;
+        const { navigation } = this.props;
+        const chartId = navigation.state.params.chartData.id;
+        const userSession = await AsyncStorage.getItem('session');
+        const _userSession = JSON.parse(userSession);
+        const apiData = drawerDataList.map((item,idx) => {
+           if(idx !== 0) {
+               return ({
+                   content: item.text,
+                   datetime: item.date,
+                   destination: item.destination,
+                   source: item.source,
+                   type: item.type,
+               })
+           }
+        });
+        fetch(api_url, {
+            method:'POST',
+            headers:{
+            Accept: 'application/json',
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+                "action": "saveLog",
+                "log_type": type,
+                "user_id": _userSession.id,
+                "chart_id": chartId,
+                "log_details":  apiData.splice(1),
+            })
+        })
+        .then(response => {
+            Alert.alert(
+                'Alert',
+                'Your incident logs has been saved',
+                [{
+                    text: 'OK',
+                    onPress: () => this.props.navigation.navigate('Home')
+                }],
+                {cancelable: false},
+            );
+        }).catch(err => {
+            Alert.alert(
+                'Something went wrong please try again later.',
+                [{
+                    text: 'OK',
+                }],
+                {cancelable: false},
+            );
+        });
     };
 
     render(){
@@ -317,7 +379,7 @@ export default class Cardpage extends React.Component {
                                                     color="#000000"
                                                     size={10}
                                                     style={{ marginLeft: 5, marginRight: 5, marginTop: 10 }}
-                                                    onPress={ () => this.handlePrevButton(item) }
+                                                    // onPress={ () => this.handlePrevButton(item) }
                                                 />
                                             </View>
                                         </TouchableOpacity>
@@ -356,14 +418,14 @@ export default class Cardpage extends React.Component {
                                                 ))
                                                 : <Fragment>
                                                     <TouchableOpacity
-                                                        onPress={ () => {}}
+                                                        onPress={ () => this.saveData('incedent') }
                                                         underlayColor='#fff'
                                                         style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
                                                     >
                                                         <Text style={ styles.saveBtn }>Save As Incident Report</Text>
                                                     </TouchableOpacity>
                                                     <TouchableOpacity
-                                                        onPress={ () => {}}
+                                                        onPress={ () => this.saveData('drill') }
                                                         underlayColor='#fff'
                                                         style={{ ...styles.nxtBtn, marginTop: 50, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
                                                     >
