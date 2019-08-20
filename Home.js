@@ -509,6 +509,7 @@ this.props.navigation.navigate('Login');
 
           </View>
             <View style={{flex: 1,
+                zIndex: -1,
                 justifyContent: 'flex-end',
                 alignItems: 'center',
                 paddingBottom: 50,
