@@ -1,23 +1,19 @@
 import React, {Component, Fragment} from 'react';
-import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Picker} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Fonts } from './src/utils/Fonts';
 
 export default class Emergency extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            urgentMsg: props.defaultValue,
-        };
-        this.msgMapping = {
-            intruder: 'Intruder',
-            emergency: 'Emergency',
-            activeShooter: 'Active Shooter',
-        }
-    }
+    state = {
+        selectedValue: '',
+    };
+
+    handlePickerChange = selectedValue => this.setState({ selectedValue });
 
     render(){
         const { defaultValue } = this.props;
+        const { selectedValue } = this.state;
         return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -75,17 +71,17 @@ export default class Emergency extends Component {
             </View>
             <View style={styles.pickerContainerHeight}>
                 <Text style={styles.textWrapper}>Urgent Message</Text>
-                {Platform.OS === 'ios' ? <TextInput style={styles.inputField} value={this.msgMapping[this.state.urgentMsg]}/> : null}
-                <Picker
-                    selectedValue={this.state.urgentMsg}
-                    style={Platform.OS === 'ios' ? {flex:1} : styles.inputField}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({urgentMsg: itemValue})
-                    }>
-                    <Picker.Item label="Active Shooter" value="activeShooter" />
-                    <Picker.Item label="Emergency" value="emergency" />
-                    <Picker.Item label="Intruder" value="intruder" />
-                </Picker>
+                <RNPickerSelect
+                    placeholder={{}}
+                    style={pickerSelectStyles}
+                    value={selectedValue || defaultValue}
+                    onValueChange={ value => this.handlePickerChange(value) }
+                    items={[
+                        { label: 'Active Shooter', value: 'activeShooter' },
+                        { label: 'Emergency', value: 'emergency' },
+                        { label: 'Intruder', value: 'intruder' },
+                    ]}
+                />
                 <Text style={styles.textWrapper}>Custom Message (Optional)</Text>
                 <TextInput style={styles.inputField}/>
                 <TouchableOpacity style={{
@@ -100,6 +96,7 @@ export default class Emergency extends Component {
             </View>
             <View style={{flex: 1,
                 justifyContent: 'flex-end',
+                zIndex: -1,
                 alignItems: 'center',
                 paddingBottom: 30,
             }}>
@@ -110,6 +107,31 @@ export default class Emergency extends Component {
         )
     }
 }
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 4,
+        color: 'black',
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
+    inputAndroid: {
+        fontSize: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        marginLeft: 20,
+        marginRight: 20,
+        borderWidth: 0.5,
+        borderRadius: 8,
+        backgroundColor: '#ffffff',
+        height: 40,
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
+});
 
 const styles = StyleSheet.create({
     container: {
@@ -131,7 +153,7 @@ const styles = StyleSheet.create({
     inputField: {
         marginLeft: 20,
         marginRight: 20,
-        borderRadius: 5,
+        // borderRadius: 5,
         backgroundColor: '#ffffff',
         height: 40
     },
