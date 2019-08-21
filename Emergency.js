@@ -4,6 +4,18 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Fonts } from './src/utils/Fonts';
 
 export default class Emergency extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            urgentMsg: props.defaultValue,
+        };
+        this.msgMapping = {
+            intruder: 'Intruder',
+            emergency: 'Emergency',
+            activeShooter: 'Active Shooter',
+        }
+    }
+
     render(){
         const { defaultValue } = this.props;
         return (
@@ -61,12 +73,15 @@ export default class Emergency extends Component {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{ height: 250, backgroundColor: 'rgba(220,20,20,.85)'}}>
+            <View style={styles.pickerContainerHeight}>
                 <Text style={styles.textWrapper}>Urgent Message</Text>
+                {Platform.OS === 'ios' ? <TextInput style={styles.inputField} value={this.msgMapping[this.state.urgentMsg]}/> : null}
                 <Picker
-                    selectedValue={defaultValue}
-                    style={styles.inputField}
-                >
+                    selectedValue={this.state.urgentMsg}
+                    style={Platform.OS === 'ios' ? {flex:1} : styles.inputField}
+                    onValueChange={(itemValue, itemIndex) =>
+                        this.setState({urgentMsg: itemValue})
+                    }>
                     <Picker.Item label="Active Shooter" value="activeShooter" />
                     <Picker.Item label="Emergency" value="emergency" />
                     <Picker.Item label="Intruder" value="intruder" />
@@ -86,7 +101,7 @@ export default class Emergency extends Component {
             <View style={{flex: 1,
                 justifyContent: 'flex-end',
                 alignItems: 'center',
-                paddingBottom: 50,
+                paddingBottom: 30,
             }}>
                 <Image source={require('./assets/watermark.png')} style={{width: 300, height: 80}} />
             </View>
@@ -171,4 +186,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection:'row'
     },
+    pickerContainerHeight: {
+        height: Platform.OS === 'ios' ? 470 : 250,
+        backgroundColor: 'rgba(220,20,20,.85)',
+    }
 });
