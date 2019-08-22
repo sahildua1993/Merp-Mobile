@@ -85,9 +85,10 @@ export default class Emergency extends Component {
                 <Text style={styles.textWrapper}>Custom Message (Optional)</Text>
                 <TextInput style={styles.inputField}/>
                 <TouchableOpacity style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    height: 50,
+                    marginTop: 30,
+                    width: 150,
+                    alignSelf: 'center'
                 }}>
                     <View style={styles.submitBtn}>
                         <Text style={styles.submitText}>Send Message</Text>
@@ -113,9 +114,11 @@ const pickerSelectStyles = StyleSheet.create({
         fontSize: 16,
         paddingVertical: 12,
         paddingHorizontal: 10,
+        marginLeft: 20,
+        marginRight: 20,
         borderWidth: 1,
         borderColor: 'gray',
-        borderRadius: 4,
+        backgroundColor: '#ffffff',
         color: 'black',
         paddingRight: 30, // to ensure the text is never behind the icon
     },
@@ -126,7 +129,6 @@ const pickerSelectStyles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 20,
         borderWidth: 0.5,
-        borderRadius: 8,
         backgroundColor: '#ffffff',
         height: 40,
         paddingRight: 30, // to ensure the text is never behind the icon
@@ -139,21 +141,19 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(230, 230, 230)',
     },
     submitBtn: {
-        height: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 25,
         borderRadius: 5,
         backgroundColor: '#0d2a7a',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: "center",
     },
     submitText: {
       color: '#ffffff',
-        fontSize: 16,
+      fontSize: 16,
     },
     inputField: {
         marginLeft: 20,
         marginRight: 20,
-        // borderRadius: 5,
         backgroundColor: '#ffffff',
         height: 40
     },
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     pickerContainerHeight: {
-        height: Platform.OS === 'ios' ? 470 : 250,
+        height: 300,
         backgroundColor: 'rgba(220,20,20,.85)',
     }
 });
