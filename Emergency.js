@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, TextInput} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Icon from "react-native-vector-icons/Ionicons";
 import { Fonts } from './src/utils/Fonts';
 
 export default class Emergency extends Component {
@@ -81,6 +82,14 @@ export default class Emergency extends Component {
                         { label: 'Emergency', value: 'emergency' },
                         { label: 'Intruder', value: 'intruder' },
                     ]}
+                    Icon={() => {
+                        return <Icon
+                            name="md-play"
+                            size={16}
+                            color="black"
+                            style={{ position: 'absolute', right: 35, top: 10, zIndex: 1, transform: [{ rotate: '90deg'}] }}
+                        />;
+                    }}
                 />
                 <Text style={styles.textWrapper}>Custom Message (Optional)</Text>
                 <TextInput style={styles.inputField}/>
@@ -151,6 +160,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     inputField: {
+        fontSize: 16,
+        paddingLeft: 10,
         marginLeft: 20,
         marginRight: 20,
         // borderRadius: 5,
