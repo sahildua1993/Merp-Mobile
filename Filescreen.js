@@ -12,6 +12,9 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 
 import Home from './Home';
 
+import { Fonts } from './src/utils/Fonts';
+
+
 import  alaSQLSpace from 'alasql';
 
 import HTML from 'react-native-render-html';
@@ -43,11 +46,11 @@ const MyStatusBar = ({backgroundColor, ...props}) => (
 
 );
 
- 
+
 
 const SECTIONS = [];
 
- 
+
 
 export default class FileScreen extends React.Component {
 
@@ -59,7 +62,7 @@ header:null,
 
 };
 
- 
+
 
 constructor(props){
 
@@ -89,11 +92,11 @@ constructor(props){
 
         newarray_loading:true,
 
-       
+
 
         safeguard_org:'',
 
-        safeguard_org_loading:true, 
+        safeguard_org_loading:true,
 
         clicks:1,
 
@@ -141,11 +144,11 @@ constructor(props){
 
   }
 
- 
 
- 
 
- 
+
+
+
 
   logoutuser()
 
@@ -177,7 +180,7 @@ constructor(props){
 
   confirmSubmit(){
 
-   
+
 
     AsyncStorage.clear();
 
@@ -197,35 +200,35 @@ this.props.navigation.navigate('Login');
 
 //     }, function(){
 
- 
+
 
 //     });
 
 //  });
 
- 
+
 
 }
 
- 
+
 
 componentDidMount(){
 
- 
 
- 
 
- 
+
+
+
 
 //   AsyncStorage.getItem('safeguard',(err,results)=>{
 
- 
+
 
 //   let sdata=JSON.parse(results);
 
-   
 
- 
+
+
 
 //    this.setState({
 
@@ -235,23 +238,23 @@ componentDidMount(){
 
 //    }, function(){
 
-   
+
 
 //    });
 
 //  });
 
- 
+
 
     var temparray = [];
 
- 
+
 
     const { navigation } = this.props;
 
     AsyncStorage.getItem('safeguard',(err,safeguard_folder)=>{
 
- 
+
 
       let sdata=JSON.parse(safeguard_folder);
 
@@ -267,15 +270,15 @@ componentDidMount(){
 
         }, function(){
 
- 
+
 
         });
 
       });
 
-     
 
- 
+
+
 
       // AsyncStorage.getItem('safeguard_collections',(err,safeguard_collections)=>{
 
@@ -287,7 +290,7 @@ componentDidMount(){
 
       //   }, function(){
 
- 
+
 
           // for (let i=0;i<this.state.safeguard_collections.length;i++)
 
@@ -319,11 +322,11 @@ componentDidMount(){
 
           //      }
 
- 
+
 
           //      if(i+1===this.state.safeguard_collections.length){
 
- 
+
 
           //       this.setState({
 
@@ -339,13 +342,13 @@ componentDidMount(){
 
       // });
 
- 
 
-   
+
+
 
   }
 
- 
+
 
   folder_item_close(){
 
@@ -365,7 +368,7 @@ componentDidMount(){
 
       }, function(){
 
- 
+
 
       });
 
@@ -373,13 +376,13 @@ componentDidMount(){
 
   }
 
- 
 
- 
+
+
 
   actionOnRow(item) {
 
- 
+
 
     // let safeguard= localStorage.getItem("safeguard");
 
@@ -389,11 +392,11 @@ componentDidMount(){
 
     // let res= alaSQLSpace('SELECT * FROM ? where file_folder_id = ?', [filedata,e]);
 
- 
+
 
    AsyncStorage.getItem('safeguard',(err,safeguard_links)=>{
 
- 
+
 
       let safeguarddata=JSON.parse(safeguard_links);
 
@@ -409,11 +412,11 @@ componentDidMount(){
 
         }, function(){
 
- 
+
 
             res= alaSQLSpace('SELECT * FROM ? where file_folder_id = ?', [this.state.safeguard_links,item.id]);
 
-          
+
 
             this.setState({
 
@@ -435,17 +438,17 @@ componentDidMount(){
 
    }
 
- 
+
 
    actiondetails(item,index){
 
- 
+
 
     var temp=[];
 
- 
 
-      
+
+
 
     for (let i=0;i<this.state.safeguard_collections.length;i++)
 
@@ -455,7 +458,7 @@ componentDidMount(){
 
          {
 
-         
+
 
           temp.push({
 
@@ -463,17 +466,17 @@ componentDidMount(){
 
               "supporting_material_content":this.state.safeguard_collections[i].supporting_material_content
 
- 
+
 
            })
 
- 
+
 
          }
 
          else{
 
-          
+
 
           temp.push({
 
@@ -481,19 +484,19 @@ componentDidMount(){
 
             "supporting_material_content":'<p></p>'
 
- 
+
 
          })
 
          }
 
-     
 
- 
+
+
 
          if(i+1===this.state.safeguard_collections.length){
 
-        
+
 
           this.setState({
 
@@ -507,7 +510,7 @@ componentDidMount(){
 
    }
 
- 
+
 
    _renderSectionTitle = section => {
 
@@ -569,7 +572,7 @@ render() {
 
     return(
 
-       
+
 
       <View style={{flex: 1, padding: 20}}>
 
@@ -577,7 +580,7 @@ render() {
 
        </View>
 
-    )  
+    )
 
   }
 
@@ -585,7 +588,7 @@ render() {
 
     <View style={{backgroundColor: '#fff',flex : 1}}>
 
-       
+
 
    {
 
@@ -603,7 +606,7 @@ render() {
 
     renderItem={({item}) => (
 
-     
+
 
     <TouchableOpacity onPress={ () => this.actionOnRow(item)}
 
@@ -619,7 +622,7 @@ render() {
 
     </TouchableOpacity>
 
-   
+
 
     )}
 
@@ -627,17 +630,17 @@ render() {
 
     />
 
-  
+
 
     </View>
 
     : null }
 
-   
+
 
     {this.state.folder_item_view ?
 
-   
+
 
     <View style={{flexDirection: 'row',}}>
 
@@ -657,17 +660,17 @@ render() {
 
     </TouchableOpacity>
 
- 
+
 
     <FlatList
 
-    
+
 
     data={this.state.folder_item}
 
     renderItem={({item}) => (
 
-     
+
 
       <TouchableOpacity
 
@@ -689,7 +692,7 @@ render() {
 
       </TouchableOpacity>
 
-   
+
 
     )}
 
@@ -697,17 +700,17 @@ render() {
 
     />
 
-      
+
 
     </View>
 
     : null }
 
- 
+
 
     {/* <WebView
 
-     
+
 
        source={{uri: this.state.image_full_path}}
 
@@ -715,17 +718,17 @@ render() {
 
 />  */}
 
-   
+
 
   </View>
 
     );
 
- 
 
-   
 
-    
+
+
+
 
     const SecondRoute = () => (
 
@@ -779,7 +782,7 @@ render() {
 
                 </TouchableOpacity>
 
-                )}              
+                )}
 
                 keyExtractor={ (item, index) => index.toString() }
 
@@ -789,107 +792,112 @@ render() {
 
     );
 
- 
+
 
 return (
 
- 
+
 
 <View style={styles.wrapper}>
 
 <MyStatusBar backgroundColor="#1e3a6b" barStyle="light-content" />
 
-<View style={styles.header}>
+    <View style={styles.header}>
 
-            <View style={styles.text}>
-
+        <View style={styles.text}>
+            <TouchableOpacity
+                underlayColor='#fff'
+                style={{flexWrap: 'wrap',
+                    flexDirection:'row',
+                }}
+                onPress={() => this.props.navigation.navigate('Home')}
+            >
                 <View style={styles.logoimg}>
 
                     <View>
 
-                        <View style={styles.logoText}>
+                        <View>
 
-                        <TouchableOpacity
-
-                    onPress={() => this.props.navigation.navigate('Home')}
-
-                    underlayColor='#fff'>
-
-                            <Icon color='#fff'  name='home' type='font-awesome' size={26} />
-
-                            </TouchableOpacity>
+                            <Text style={styles.iconfont}>h</Text>
 
                         </View>
 
                     </View>
 
-                    <View style={{paddingLeft: 5, marginTop: 2,}}>
+                    <View style={{paddingLeft: 5, marginTop: 3,}}>
 
                         <Text style={styles.logoText}>
 
-                            arodek
+                            Arodek
 
                         </Text>
 
                     </View>
 
                 </View>
+            </TouchableOpacity>
 
-            </View>
+        </View>
 
-            <View style={styles.rightnav}>
+        <View style={styles.rightnav}>
 
-                    <TouchableOpacity
+            <TouchableOpacity
 
-                    onPress={() => this.props.navigation.navigate('Icons')}
+                onPress={() => this.props.navigation.navigate('Icons')}
 
-                    underlayColor='#fff'>
+                underlayColor='#fff'>
 
-                        <Icon color='#fff'  name='help' type='material' size={26}/>
+                <Text style={styles.iconfont}>?</Text>
 
-                    </TouchableOpacity>
+            </TouchableOpacity>
 
- 
 
-                    <TouchableOpacity
 
-                    onPress={() => this.props.navigation.navigate('Filescreen')}
+            <TouchableOpacity
 
-                    underlayColor='#fff'>
 
-                        <Icon color='#fff'  name='folder' type='material'  size={26}/>
 
-                    </TouchableOpacity>
+                onPress={() => this.props.navigation.navigate('Filescreen')}
 
- 
+                underlayColor='#fff'>
 
-                    <TouchableOpacity
+                {/* <Icon color='#fff'  name='folder' type='material'  size={26}/> */}
 
-                    onPress={() => this.props.navigation.navigate('Profile')}
+                <Text style={styles.iconfont}>d</Text>
 
-                    underlayColor='#fff'>
+            </TouchableOpacity>
 
-                        <Icon color='#fff'  name='torso' type='foundation' size={26}/>
 
-                    </TouchableOpacity>
 
- 
+            <TouchableOpacity
 
-                    <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Profile')}
 
-                    onPress={() => this.logoutuser()}
+                underlayColor='#fff'>
 
-                    underlayColor='#fff'>
+                {/* <Icon color='#fff'  name='torso' type='foundation' size={26}/> */}
 
-                        <Icon color='#fff'  name='power' type='foundation' size={26} />
+                <Text style={styles.iconfont}>u</Text>
 
-                    </TouchableOpacity>
+            </TouchableOpacity>
 
-            </View>
 
-          </View>
 
- 
+            <TouchableOpacity
+
+                onPress={() => this.logoutuser()}
+
+                underlayColor='#fff'>
+
+                <Text style={styles.iconfont}>o</Text>
+
+            </TouchableOpacity>
+
+        </View>
+
+    </View>
+
+
 
 <View style={styles.mainsection}>
 
@@ -909,7 +917,7 @@ return (
 
       //  initialLayout={{ width: Dimensions.get('window').width,height:Dimensions.get('window').height-50}}
 
- 
+
 
         renderTabBar={props => (
 
@@ -925,7 +933,7 @@ return (
 
               //tabStyle={styles.tabStyle}
 
-              
+
 
               //style={styles.tab}
 
@@ -935,11 +943,11 @@ return (
 
       />
 
- 
+
 
 <View style={{position: 'absolute', right: 10, top: 6,}}>
 
- 
+
 
 <TouchableOpacity
 
@@ -949,15 +957,15 @@ onPress={() => this.props.navigation.navigate('Home')}>
 
 <Icon color='#fff'  name='close' type='material' size={35} />
 
- 
+
 
 </TouchableOpacity>
 
- 
+
 
 </View>
 
- 
+
 
 <TouchableOpacity onPress={ () => this.actionimageclick()}
 
@@ -965,11 +973,11 @@ onPress={() => this.props.navigation.navigate('Home')}>
 
     underlayColor='#fff'>
 
-    <Text style={styles.loginText}>{this.state.image_name}</Text>             
+    <Text style={styles.loginText}>{this.state.image_name}</Text>
 
   </TouchableOpacity>
 
- 
+
 
     {/* <Image style={{width: 50, height: 50}}
 
@@ -977,11 +985,11 @@ onPress={() => this.props.navigation.navigate('Home')}>
 
 </View>
 
- 
+
 
 </View>
 
- 
+
 
 );
 
@@ -1002,39 +1010,361 @@ const styles = StyleSheet.create({
 
 // },
 
-wrapper: {
+    wrapper: {
 
-  flex: 1,
+        flex: 1,
 
-  flexDirection: 'column',
+        flexDirection: 'column',
 
-  justifyContent: 'flex-start',
+        justifyContent: 'flex-start',
 
-  backgroundColor: '#e6e6e6',
+        backgroundColor: '#e6e6e6',
 
-},
+    },
 
-header: {
+    linearGradient: {
 
-   height: Platform.OS === 'ios' ? 75 : 56,
+        alignItems: 'center',
 
-   marginTop: Platform.OS === 'ios' ? 0 : 24,
+        flex: 1,
 
-   ...Platform.select({
+        flexDirection: 'column'
 
-       ios: { backgroundColor: '#031537', paddingTop: 24},
+    },
 
-       android: { backgroundColor: '#031537'}
+    header: {
 
-   }),
+        height: Platform.OS === 'ios' ? 75 : 56,
 
-   alignItems: 'center',
+        marginTop: Platform.OS === 'ios' ? 0 : 24,
 
-   justifyContent: 'space-between',
+        ...Platform.select({
 
-   flexDirection:'row'
+            ios: { backgroundColor: '#031537', paddingTop: 24},
 
-   },
+            android: { backgroundColor: '#031537'}
+
+        }),
+
+        alignItems: 'center',
+
+        justifyContent: 'space-between',
+
+        flexDirection:'row'
+
+    },
+
+    text: {
+
+        color: '#fff',
+
+        fontSize: 24,
+
+        flex: 2,
+
+        flexDirection: 'row',
+
+        alignItems: 'center',
+
+        justifyContent: 'center',
+
+
+
+    },
+
+    rightnav: {
+
+        // maxWidth: 120,
+
+        flex: 1,
+
+        flexDirection: 'row',
+
+        justifyContent: 'space-between',
+
+        alignItems: 'center',
+
+        paddingRight: 10,
+
+
+
+    },
+
+    iconfont:{
+
+        fontFamily: Fonts.Safeguard,
+
+        color:'#fff',
+
+        fontSize:25,
+
+    },
+
+    logoimg: {
+
+        paddingLeft: 5,
+
+        flex: 1,
+
+        flexDirection: 'row',
+
+        //backgroundColor: 'red',
+
+    },
+
+    logoText: {
+
+        color: 'white',
+
+        fontSize: 14,
+
+        //fontWeight: 'bold',
+
+        paddingLeft: 0,
+
+        fontFamily: Fonts.Arimo
+
+    },
+
+
+
+    mainsection: {
+
+        backgroundColor: '#e6e6e6',
+
+        //flex: 14,
+
+        paddingTop: 5,
+
+    },
+
+    loginScreenButton:{
+
+        backgroundColor:'#730e12',
+
+        borderRadius:5,
+
+        //flex: 1,
+
+        flexDirection: 'row',
+
+        justifyContent: 'center',
+
+        alignItems: 'center',
+
+        overflow: 'hidden',
+
+        height: 53,
+
+    },
+
+
+
+    loginScreenButton2:{
+
+        backgroundColor:'#eebc00',
+
+        borderRadius:5,
+
+        //flex: 1,
+
+        flexDirection: 'row',
+
+        justifyContent: 'center',
+
+        alignItems: 'center',
+
+        overflow: 'hidden',
+
+        height: 53,
+
+    },
+
+
+
+    loginScreenButton3:{
+        marginBottom:1,
+        backgroundColor:'#0d2a7a',
+        minHeight: 60,
+    },
+
+
+
+    loginText:{
+
+        color:'#fff',
+
+        textAlign:'center',
+
+        paddingLeft : 0,
+
+        paddingRight : 0,
+
+        fontSize: 18,
+
+        fontWeight: 'bold',
+
+        paddingTop:23,
+
+        paddingBottom:0,
+
+        flex:1,
+
+        flexDirection: 'row',
+
+        justifyContent:'center',
+
+        alignItems:'center',
+
+        textTransform: 'uppercase',
+
+        fontFamily: Fonts.Arimo,
+
+        lineHeight:14,
+
+    },
+
+    loginText1:{
+
+        color:'#fff',
+
+        textAlign:'center',
+        fontSize: 18,
+
+        fontWeight: 'bold',
+
+        paddingTop:12,
+
+
+        flex:1,
+
+        flexDirection: 'row',
+
+        justifyContent:'center',
+
+        //flexWrap: 'wrap',
+
+        alignItems:'center',
+
+        textTransform: 'uppercase',
+
+        fontFamily: Fonts.Arimo,
+
+        lineHeight:15,
+
+    },
+
+    loginText2:{
+
+        color:'#fff',
+
+        textAlign:'center',
+
+        fontSize: 18,
+
+        fontWeight: 'bold',
+
+        paddingTop:18,
+
+        paddingBottom:15,
+
+        paddingLeft:20,
+
+        paddingRight:20,
+
+        //flex:1,
+
+        flexDirection: 'row',
+
+        textTransform: 'uppercase',
+
+        fontFamily: Fonts.Arimo
+
+    },
+
+
+
+    btnBg1:{
+
+        //flex: 1,
+
+        flexDirection: 'row',
+
+        marginBottom: 8,
+
+        //marginTop: 6,
+
+
+
+    },
+
+    btnBg2:{
+
+        //flex: 1,
+
+        flexDirection: 'row',
+
+        marginBottom: 8,
+
+    },
+
+    btnBg3:{
+
+        //flex:8,
+
+        flexDirection: 'column',
+
+        // backgroundColor: 'red',
+
+    },
+
+    btncont1:{
+
+        paddingLeft: 6,
+
+        paddingRight: 3,
+
+        flex: 1,
+
+    },
+
+    btncont2:{
+
+        paddingLeft: 3,
+
+        paddingRight: 6,
+
+        flex: 1,
+
+    },
+
+    logobackground: {
+
+        //flex:1,
+
+        justifyContent:'center',
+
+        alignItems: 'center',
+
+    },
+
+    blnkbottom: {
+
+        justifyContent: 'flex-end',
+
+        alignItems: 'center',
+
+        //position: 'absolute',
+
+        //flex: 1,
+
+        paddingBottom: 20,
+
+        //bottom:50,
+
+        //marginTop: 20,
+
+    },
 
    text: {
 
@@ -1050,7 +1380,7 @@ header: {
 
       justifyContent: 'center',
 
-     
+
 
       },
 
@@ -1068,7 +1398,7 @@ header: {
 
            paddingRight: 10,
 
-         
+
 
          },
 
@@ -1096,7 +1426,7 @@ header: {
 
       },
 
- 
+
 
 mainsection: {
 
@@ -1108,7 +1438,7 @@ flex: 1,
 
 },
 
- 
+
 
 headingTxt:{
 
@@ -1122,7 +1452,7 @@ paddingBottom: 24,
 
 },
 
- 
+
 
 headingtxtsty: {
 
@@ -1132,7 +1462,7 @@ fontWeight: 'bold',
 
 },
 
- 
+
 
 iconListBg: {
 
@@ -1148,7 +1478,7 @@ flex:9,
 
 },
 
- 
+
 
 iconlistrow: {
 
@@ -1160,7 +1490,7 @@ marginBottom: 30,
 
 },
 
- 
+
 
 iconbox: {
 
@@ -1172,7 +1502,7 @@ flex: 2,
 
 },
 
- 
+
 
 icontxt: {
 
@@ -1190,7 +1520,7 @@ scene: {
 
   },
 
- 
+
 
 // text: {
 
@@ -1276,7 +1606,7 @@ buttonFolder:{
 
   textAlign: 'center',
 
- 
+
 
 },
 

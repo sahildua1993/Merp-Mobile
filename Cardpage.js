@@ -32,6 +32,7 @@ export default class Cardpage extends React.Component {
         isTextboxSelected: false,
         addNoteText: '',
         staticData: {},
+        isIncident: false,
     };
 
     async componentDidMount() {
@@ -42,9 +43,10 @@ export default class Cardpage extends React.Component {
         const data = _safeguard.charts.find(item => item.id === navigation.state.params.chartData.id);
         if(data) {
             this.setState({
+                isIncident: navigation && navigation.state && navigation.state.params && navigation.state.params.safeguard_charts_id === '1036',
                 staticData: {
                     title: data.supporting_materials_title,
-                    content: data.supporting_materials_content
+                    content: data.supporting_materials_content,
                 }
             });
         }
@@ -285,7 +287,7 @@ export default class Cardpage extends React.Component {
     };
 
     render(){
-        const { newFlowCards, activeCardIndex, breadcrumbs, showDrawer, isTextboxSelected, drawerDataList, showStaticDrawer, staticData } = this.state;
+        const { newFlowCards, activeCardIndex, breadcrumbs, showDrawer, isTextboxSelected, drawerDataList, showStaticDrawer, staticData, isIncident } = this.state;
         const { navigation } = this.props;
         const activeCardContent = newFlowCards && newFlowCards.length ? newFlowCards[activeCardIndex] : null;
         return(
@@ -390,7 +392,7 @@ export default class Cardpage extends React.Component {
                             <View style={{ ...styles.cardWrapper, marginTop: (activeCardIndex >= 1) ? 15 : 25,  borderColor: COLOR_CODES[activeCardContent.card_type].headColor  }}>
                                 <View style={{ ...styles.titleContainer, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}>
                                     <Text style={ styles.title}>
-                                        {navigation.state.params.chartData.title} - {activeCardContent.card_type}
+                                        {`${navigation.state.params.chartData.title}${isIncident ? ' - ' : ''}${isIncident ? activeCardContent.card_type : ''}`}
                                     </Text>
                                 </View>
                                 <View style={{ ...styles.cardBody, backgroundColor: COLOR_CODES[activeCardContent.card_type].bgColor }}>
@@ -399,87 +401,93 @@ export default class Cardpage extends React.Component {
                                         stylesheet={styles}
                                         addLineBreaks={false}
                                     />
-                                    <View style={styles.btnWrapper}>
-                                        {
-                                            activeCardContent.actions.length ? activeCardContent.actions.map((item, idx) => (
-                                                    <TouchableOpacity
-                                                        key={ idx }
-                                                        onPress={ () => {
-                                                            this.handleNextButton(item);
-                                                            this.addBreadcrumb(activeCardContent);
-                                                        }}
-                                                        underlayColor='#fff'
-                                                        style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
-                                                    >
-                                                        <Text style={ styles.nxtBtnTxt }>
-                                                            { (item.content == '' || item.content == 'test') ? 'Next' : item.content}
-                                                        </Text>
-                                                    </TouchableOpacity>
-                                                ))
-                                                : <Fragment>
-                                                    <TouchableOpacity
-                                                        onPress={ () => this.saveData('incedent') }
-                                                        underlayColor='#fff'
-                                                        style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
-                                                    >
-                                                        <Text style={ styles.saveBtn }>Save As Incident Report</Text>
-                                                    </TouchableOpacity>
-                                                    <TouchableOpacity
-                                                        onPress={ () => this.saveData('drill') }
-                                                        underlayColor='#fff'
-                                                        style={{ ...styles.nxtBtn, marginTop: 50, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
-                                                    >
-                                                        <Text style={ styles.saveBtn }>Save As Drill Log</Text>
-                                                    </TouchableOpacity>
-                                                </Fragment>
-                                        }
-                                    </View>
+                                    { isIncident &&
+                                        <View style={styles.btnWrapper}>
+                                            {
+                                                activeCardContent.actions.length ? activeCardContent.actions.map((item, idx) => (
+                                                        <TouchableOpacity
+                                                            key={ idx }
+                                                            onPress={ () => {
+                                                                this.handleNextButton(item);
+                                                                this.addBreadcrumb(activeCardContent);
+                                                            }}
+                                                            underlayColor='#fff'
+                                                            style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
+                                                        >
+                                                            <Text style={ styles.nxtBtnTxt }>
+                                                                { (item.content == '' || item.content == 'test') ? 'Next' : item.content}
+                                                            </Text>
+                                                        </TouchableOpacity>
+                                                    ))
+                                                    : <Fragment>
+                                                        <TouchableOpacity
+                                                            onPress={ () => this.saveData('incedent') }
+                                                            underlayColor='#fff'
+                                                            style={{ ...styles.nxtBtn, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
+                                                        >
+                                                            <Text style={ styles.saveBtn }>Save As Incident Report</Text>
+                                                        </TouchableOpacity>
+                                                        <TouchableOpacity
+                                                            onPress={ () => this.saveData('drill') }
+                                                            underlayColor='#fff'
+                                                            style={{ ...styles.nxtBtn, marginTop: 50, backgroundColor: COLOR_CODES[activeCardContent.card_type].headColor }}
+                                                        >
+                                                            <Text style={ styles.saveBtn }>Save As Drill Log</Text>
+                                                        </TouchableOpacity>
+                                                    </Fragment>
+                                            }
+                                        </View>
+                                    }
                                 </View>
                             </View>
                             }
                         </View>
                     </View>
                 </ScrollView>
-                <TouchableOpacity
-                    style={{
-                        position: 'absolute',
-                        backgroundColor: '#031537',
-                        bottom: 120,
-                        borderBottomLeftRadius: 4,
-                        borderTopLeftRadius: 4,
-                        right: showStaticDrawer ? '85%' : 0
-                    }}
-                    onPress={ this.handleStaticDrawer }
-                >
-                    <View style={{
-                        height: 70,
-                        width: 50,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}>
-                        <Image source={require('./assets/event_aid_icon.png')} />
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: '#031537',
-                        position: 'absolute',
-                        bottom: 30,
-                        borderBottomLeftRadius: 4,
-                        borderTopLeftRadius: 4,
-                        right: showDrawer ? '85%' : 0
-                    }}
-                    onPress={ this.handleDrawer }
-                >
-                    <View style={{
-                        height: 70,
-                        width: 50,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}>
-                        <Image source={require('./assets/incident_log_icon.png')} />
-                    </View>
-                </TouchableOpacity>
+                {isIncident &&
+                    <Fragment>
+                        <TouchableOpacity
+                            style={{
+                                position: 'absolute',
+                                backgroundColor: '#031537',
+                                bottom: 120,
+                                borderBottomLeftRadius: 4,
+                                borderTopLeftRadius: 4,
+                                right: showStaticDrawer ? '85%' : 0
+                            }}
+                            onPress={ this.handleStaticDrawer }
+                        >
+                            <View style={{
+                                height: 70,
+                                width: 50,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                                <Image source={require('./assets/event_aid_icon.png')} />
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{
+                                backgroundColor: '#031537',
+                                position: 'absolute',
+                                bottom: 30,
+                                borderBottomLeftRadius: 4,
+                                borderTopLeftRadius: 4,
+                                right: showDrawer ? '85%' : 0
+                            }}
+                            onPress={ this.handleDrawer }
+                        >
+                            <View style={{
+                                height: 70,
+                                width: 50,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}>
+                                <Image source={require('./assets/incident_log_icon.png')} />
+                            </View>
+                        </TouchableOpacity>
+                    </Fragment>
+                }
                 { showStaticDrawer && staticData.title && staticData.content &&
                     <View style={{
                         position: 'absolute',
@@ -632,7 +640,7 @@ const styles = StyleSheet.create({
     iconfont:{
         fontFamily: Fonts.Safeguard,
         color:'#fff',
-        fontSize:23,
+        fontSize:25,
         marginLeft: 10,
     },
     logoimg: {

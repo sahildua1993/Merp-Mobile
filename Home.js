@@ -271,11 +271,11 @@ this.props.navigation.navigate('Login');
 
                     </TouchableOpacity>
 
- 
+
 
                     <TouchableOpacity
 
-                   
+
 
                     onPress={() => this.props.navigation.navigate('Filescreen')}
 
@@ -287,7 +287,7 @@ this.props.navigation.navigate('Login');
 
                     </TouchableOpacity>
 
- 
+
 
                     <TouchableOpacity
 
@@ -301,7 +301,7 @@ this.props.navigation.navigate('Login');
 
                     </TouchableOpacity>
 
- 
+
 
                     <TouchableOpacity
 
@@ -512,9 +512,9 @@ this.props.navigation.navigate('Login');
                 zIndex: -1,
                 justifyContent: 'flex-end',
                 alignItems: 'center',
-                paddingBottom: 50,
+                marginBottom: 5,
             }}>
-                <Image source={require('./assets/watermark.png')} style={{width: 300, height: 80}} />
+                <Image source={require('./assets/perp_logo_grey.png')} style={{marginLeft: 13,width: 150, height: 150}} />
             </View>
         </View>
 
@@ -616,7 +616,7 @@ const styles = StyleSheet.create({
 
                 color:'#fff',
 
-                fontSize:23,
+                fontSize:25,
 
                },
 

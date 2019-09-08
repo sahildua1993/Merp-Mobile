@@ -629,9 +629,9 @@ underlayColor='#fff'>
 
 <View style={styles.blnkbottom}>
 
-<Image source={{uri: 'https://mobileemergencyresponseplans.com/images/watermark.png'}}
-
-style={{width: 300, height: 80}} />
+    <View >
+        <Image source={require('./assets/perp_logo_grey.png')} style={{marginLeft: 13,width: 150, height: 150}} />
+    </View>
 
 </View>
 
@@ -725,7 +725,7 @@ header: {
 
            color:'#fff',
 
-           fontSize:23,
+           fontSize:25,
 
           },
 

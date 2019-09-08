@@ -366,7 +366,7 @@ export default class Charts extends React.Component {
 
               color:'#fff',
 
-              fontSize:23,
+              fontSize:25,
 
              },
 

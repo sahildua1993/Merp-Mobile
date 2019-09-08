@@ -316,17 +316,17 @@ export default class Login extends React.Component {
 
       <View style={styles.mainCont}>
 
-       <View style={styles.leftBlank}></View>
+       <View style={styles.leftBlank} />
 
        <View style={styles.middlebox}>
 
-      <View style={styles.blnktop}></View>
+      <View style={styles.blnktop} />
 
       <View style={styles.container1}>
 
        <View style={styles.container2}>
 
-         <Text style={styles.text}>Mobile Emergency Response Plan</Text>
+         <Text style={styles.text}>Portable Response Emergency Plan</Text>
 
        </View>
 
@@ -413,8 +413,7 @@ export default class Login extends React.Component {
     <View style={styles.blnkbottom}>
 
     <View >
-
-     <Image source={require('./assets/watermark.png')} style={{width: 300, height: 80}} />
+     <Image source={require('./assets/perp_login.png')} style={{width: 150, height: 150}} />
     </View>
 
     </View>
@@ -491,8 +490,7 @@ const styles = StyleSheet.create({
 
     flex: 3,
     marginTop: 40,
-    justifyContent: 'center',
-
+    marginLeft: 18,
     alignItems: 'center',
 
   },

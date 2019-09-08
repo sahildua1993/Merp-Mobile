@@ -881,7 +881,7 @@ header: {
 
           color:'#fff',
 
-          fontSize:23,
+          fontSize:25,
 
          },
 

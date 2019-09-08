@@ -466,15 +466,10 @@ underlayColor='#fff'>
 
           <View style={styles.blnkbottom}>
 
-<Image source={{uri: 'https://mobileemergencyresponseplans.com/images/watermark.png'}}
+            <Image source={require('./assets/perp_logo_grey.png')} style={{ marginLeft: 13, marginTop: 150, width: 150, height: 150}} />
 
-style={{width: 300, height: 80}} />
-
-</View>
-
-
-
-           </View> 
+          </View>
+           </View>
  
            </ScrollView>
 

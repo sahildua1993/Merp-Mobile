@@ -360,7 +360,7 @@ Administrative options.
 
 <Text style={{fontFamily:'Arimo-Bold', color: '#000'}}>Sign Out</Text>
 
-- Signs the user out of the MERP system.
+- Signs the user out of the PREP system.
 
 </Text>
 
@@ -652,7 +652,7 @@ const styles = StyleSheet.create({
 
                 color:'#fff',
 
-                fontSize:23,
+                fontSize:25,
 
                },
 

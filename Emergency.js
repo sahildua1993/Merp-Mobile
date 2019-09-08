@@ -105,12 +105,12 @@ export default class Emergency extends Component {
                 </TouchableOpacity>
             </View>
             <View style={{flex: 1,
-                justifyContent: 'flex-end',
                 zIndex: -1,
+                justifyContent: 'flex-end',
                 alignItems: 'center',
-                paddingBottom: 30,
+                marginBottom: 10,
             }}>
-                <Image source={require('./assets/watermark.png')} style={{width: 300, height: 80}} />
+                <Image source={require('./assets/perp_logo_grey.png')} style={{marginLeft: 13, width: 150, height: 150}} />
             </View>
 
         </View>
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     iconfont:{
         fontFamily: Fonts.Safeguard,
         color:'#fff',
-        fontSize:23,
+        fontSize:25,
         marginLeft: 10,
     },
     header: {
