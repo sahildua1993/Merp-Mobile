@@ -9,7 +9,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.4.2",
     "alasql": "^0.4.11",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "base-64": "^0.1.0",
     "moment": "^2.24.0",
     "ramda": "^0.26.1",
